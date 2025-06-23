@@ -10,6 +10,7 @@ import ContactUs from './pages/ContactUs';
 import ForgotPassword from './pages/ForgotPassword';
 import RegisterRouter from './pages/RegisterRouter';
 import PatientRegisterRouter from './pages/PatientRegisterRouter';
+import DoctorList from './pages/DoctorList';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
           <Route path="/doctor-register" element={<RegisterRouter />} />
           <Route path="/patient-registration" element={<PatientRegisterRouter />} />
 
+          <Route path="/doctors" element={<DoctorList />} />
           {/* Add other routes here */}
           <Route path="*" element={<div>404 - Page Not Found</div>} />
         </Routes>
