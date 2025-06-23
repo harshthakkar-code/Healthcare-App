@@ -4,32 +4,58 @@ import "./DoctorStep3.css";
 const DoctorStep3 = ({ formData, prevStep }) => {
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleUpdate = () => {
-  if (!city || !state) {
-    alert("City and State are required.");
-    return;
-  }
-
-  const finalData = {
-    ...formData,
-    city,
-    state
-  };
-
-  console.log("✅ Registration Complete:\n");
-
-  Object.entries(finalData).forEach(([key, value]) => {
-    if (value instanceof File) {
-      console.log(`${key}: ${value.name}`);
-    } else {
-      console.log(`${key}: ${value}`);
+  const handleUpdate = async () => {
+    if (!city || !state) {
+      alert("City and State are required.");
+      return;
     }
-  });
 
-  alert("Registration complete!");
-};
+    const data = new FormData();
+    // Required fields from all steps
+    data.append("name", formData.name || "");
+    data.append("email", formData.email || "");
+    data.append("phone", formData.phone || "");
+    data.append("password", formData.password || "");
+    data.append("role", "doctor");
+    data.append("clinicName", formData.clinicName || "");
+    data.append("clinicAddress", formData.clinicAddress || "");
+    data.append("address", formData.address || "");
+    data.append("address2", formData.address2 || "");
+    data.append("city", city);
+    data.append("state", state);
+    data.append("pincode", formData.pincode || "");
+    data.append("gender", formData.gender || "");
+    data.append("weight", formData.weight || "");
+    data.append("height", formData.height || "");
+    data.append("age", formData.age || "");
+    data.append("blood", formData.blood || "");
+    // File fields
+    if (formData.profileImage) data.append("profileImage", formData.profileImage);
+    if (formData.certFile) data.append("certFile", formData.certFile);
+    if (formData.photoID) data.append("photoID", formData.photoID);
+    if (formData.employmentProof) data.append("employmentProof", formData.employmentProof);
 
+    setLoading(true);
+    try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        body: data,
+      });
+      const result = await res.json();
+      setLoading(false);
+      if (res.ok) {
+        alert("Registration complete! Please login.");
+        window.location.href = "/login";
+      } else {
+        alert(result.message || "Registration failed.");
+      }
+    } catch (err) {
+      setLoading(false);
+      alert("Registration failed. Please try again.");
+    }
+  };
 
   return (
     <div className="step3-container">
@@ -63,7 +89,9 @@ const DoctorStep3 = ({ formData, prevStep }) => {
 
       <div className="">
         {/* <button onClick={prevStep} className="back-btn">Back</button> */}
-        <button onClick={handleUpdate} className="update-btn">Update</button>
+        <button onClick={handleUpdate} className="update-btn" disabled={loading}>
+          {loading ? "Registering..." : "Update"}
+        </button>
       </div>
 
       {/* <p className="footer">© 2024 Doccure. All rights reserved.</p> */}
