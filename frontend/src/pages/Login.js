@@ -1,18 +1,54 @@
-const Login = () => (
-  <div className="max-w-md mx-auto mt-16 bg-white p-8 rounded shadow">
-    <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
-    <form className="space-y-4">
-      <div>
-        <label className="block mb-1 font-medium">Email</label>
-        <input type="email" className="w-full border px-3 py-2 rounded" placeholder="Enter your email" />
-      </div>
-      <div>
-        <label className="block mb-1 font-medium">Password</label>
-        <input type="password" className="w-full border px-3 py-2 rounded" placeholder="Enter your password" />
-      </div>
-      <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">Login</button>
-    </form>
-  </div>
-);
+import React from 'react';
+import './Login.css';
 
-export default Login; 
+const Login = () => {
+  return (
+    <div className="login-container">
+      {/* Left Banner Image */}
+      <div className="login-banner">
+        <img height={500} width={500} src="../../login-banner.png" alt="Login Illustration" />
+      </div>
+
+      {/* Right Form */}
+      <div className="login-form-box">
+        <h2>Login Doccure</h2>
+        <form className="login-form">
+          <label>Email</label>
+          <input type="email" placeholder="Enter your email" required />
+
+          <div className="password-wrapper">
+            <label>Password</label>
+            <a href="/forgotpassword" className="forgot-link">Forgot password?</a>
+          </div>
+          <input type="password" placeholder="Enter your password" required />
+
+          <div className="options">
+            <label>
+              <input type="checkbox" /> Remember Me
+            </label>
+            {/* <label>
+              <input type="checkbox" /> Login with OTP
+            </label> */}
+          </div>
+
+          <button type="submit" className="signin-btn">Sign in</button>
+
+          <div className="divider">or</div>
+
+          <button className="social-btn google">
+            <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google" />
+            Sign in With Google
+          </button>
+          <button className="social-btn facebook">
+            <img src="https://img.icons8.com/ios-filled/16/ffffff/facebook.png" alt="Facebook" />
+            Sign in With Facebook
+          </button>
+
+          <p className="signup-link">Don't have an account? <a href="/doctor-register">Sign up</a></p>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default Login;

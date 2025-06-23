@@ -7,6 +7,9 @@ import PatientDashboard from './pages/PatientDashboard';
 import Login from './pages/Login';
 import AboutUs from './pages/AboutUs';
 import ContactUs from './pages/ContactUs';
+import ForgotPassword from './pages/ForgotPassword';
+import RegisterRouter from './pages/RegisterRouter';
+import PatientRegisterRouter from './pages/PatientRegisterRouter';
 
 function App() {
   return (
@@ -20,6 +23,10 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/doctor-register" element={<RegisterRouter />} />
+          <Route path="/patient-registration" element={<PatientRegisterRouter />} />
+
           {/* Add other routes here */}
           <Route path="*" element={<div>404 - Page Not Found</div>} />
         </Routes>

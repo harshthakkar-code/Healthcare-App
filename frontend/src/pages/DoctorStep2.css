@@ -1,0 +1,157 @@
+.step2-container {
+  max-width: 480px;
+  margin: auto;
+  padding: 30px 20px;
+  text-align: center;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.logo {
+  height: 40px;
+  margin-bottom: 20px;
+}
+
+.step-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.step {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #e0f3fa;
+  color: #000;
+}
+
+.step.completed {
+  background-color: #00c6ff;
+  color: #fff;
+}
+
+.step.active {
+  background-color: #00c6ff;
+  color: #fff;
+}
+
+.gender-options {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.gender-card {
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 10px 20px;
+  text-align: center;
+  cursor: pointer;
+  background: #f7faff;
+  transition: all 0.3s;
+}
+
+.gender-card.selected {
+  border-color: #00c6ff;
+  background: #fff;
+}
+
+.gender-card img {
+  width: 60px;
+  height: 60px;
+}
+
+.registered-checkbox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  font-weight: 500;
+}
+
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+.form-section input,
+.form-section select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.form-section.double {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.input-group {
+  flex: 1;
+  display: flex;
+  gap: 5px;
+}
+
+.input-group input {
+  flex: 2;
+}
+
+.input-group select {
+  flex: 1;
+}
+
+.upload-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.upload-box {
+  width: 150px;
+  height: 150px;
+  background: #e7f2ff;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.upload-icon {
+  font-size: 24px;
+  background: #fff;
+  border-radius: 50%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.continue-btn {
+  background: linear-gradient(to right, #007cf0, #00c6ff);
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 40px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.footer {
+  font-size: 12px;
+  color: #777;
+  margin-top: 25px;
+}
