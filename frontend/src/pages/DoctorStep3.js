@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./DoctorStep3.css";
+import api from '../api';
 
 const DoctorStep3 = ({ formData, prevStep }) => {
   const [city, setCity] = useState("");
@@ -39,21 +40,19 @@ const DoctorStep3 = ({ formData, prevStep }) => {
 
     setLoading(true);
     try {
-      const res = await fetch("/api/auth/register", {
-        method: "POST",
-        body: data,
+      const res = await api.post('/auth/register', data, {
+        headers: { 'Content-Type': 'multipart/form-data' }
       });
-      const result = await res.json();
       setLoading(false);
-      if (res.ok) {
+      if (res.status === 201) {
         alert("Registration complete! Please login.");
         window.location.href = "/login";
       } else {
-        alert(result.message || "Registration failed.");
+        alert(res.data.message || "Registration failed.");
       }
     } catch (err) {
       setLoading(false);
-      alert("Registration failed. Please try again.");
+      alert(err.response?.data?.message || "Registration failed. Please try again.");
     }
   };
 

@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const doctorProfileSchema = new mongoose.Schema({
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  name: String,
+  email: String,
+  password: String,
   clinicName: String,
   clinicAddress: String,
   address: String,

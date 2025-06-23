@@ -1,19 +1,35 @@
 import React, { useState } from "react";
 import "./PatientStep5.css";
+import api from '../api';
 
 const PatientStep5 = ({ formData, setFormData, prevStep }) => {
   const [city, setCity] = useState(formData.city || "");
   const [state, setState] = useState(formData.state || "");
+  const [loading, setLoading] = useState(false);
 
-  const handleContinue = () => {
+  const handleContinue = async () => {
     const finalData = {
       ...formData,
       city,
       state,
+      role: 'patient',
     };
     setFormData(finalData);
-    console.log("✅ Final Patient Registration Data:", finalData);
-    alert("Patient registration complete! Check console for full data.");
+
+    setLoading(true);
+    try {
+      const res = await api.post('/auth/register', finalData);
+      setLoading(false);
+      if (res.status === 201) {
+        alert('Patient registration complete! Please login.');
+        window.location.href = '/login';
+      } else {
+        alert(res.data.message || 'Registration failed.');
+      }
+    } catch (err) {
+      setLoading(false);
+      alert(err.response?.data?.message || 'Registration failed. Please try again.');
+    }
   };
 
   return (
@@ -48,7 +64,9 @@ const PatientStep5 = ({ formData, setFormData, prevStep }) => {
         </select>
       </div>
 
-      <button className="continue-btn" onClick={handleContinue}>continue</button>
+      <button className="continue-btn" onClick={handleContinue} disabled={loading}>
+        {loading ? 'Registering...' : 'continue'}
+      </button>
       <button className="back-btn" onClick={prevStep}>back</button>
     </div>
   );
