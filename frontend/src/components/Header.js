@@ -1,25 +1,91 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+// Header.js
+import React, { useState } from 'react';
+import { FaUser, FaLock } from 'react-icons/fa';
+import { IoMdArrowDropdown } from 'react-icons/io';
 import './Header.css';
 
-const Header = () => (
-  <header className="header">
-    <div className="header-container">
-      <div className="logo">
-        <Link to="/">ClinicApp</Link>
+const Header = () => {
+  const [openDropdown, setOpenDropdown] = useState(null);
+
+  const toggleDropdown = (menu) => {
+    setOpenDropdown(openDropdown === menu ? null : menu);
+  };
+
+  const closeDropdowns = () => {
+    setOpenDropdown(null);
+  };
+
+  return (
+    <header className="header" onClick={closeDropdowns}>
+      <div className="header-left">
+        <img src="/logo.svg" alt="Doccure Logo" className="logo" />
       </div>
       <nav className="nav">
-        <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/doctors">Doctors</Link></li>
-          <li><Link to="/patients">Patients</Link></li>
-          <li><Link to="/blog">Blog</Link></li>
-          <li><Link to="/contact">Contact</Link></li>
-          <li><Link to="/login">Login</Link> / <Link to="/register">Register</Link></li>
+        <ul className="nav-list" onClick={(e) => e.stopPropagation()}>
+          <li><a href="#">Home</a></li>
+          <li
+            className="dropdown"
+            onClick={() => toggleDropdown('doctors')}
+          >
+            Doctors <IoMdArrowDropdown />
+            {openDropdown === 'doctors' && (
+              <ul className="dropdown-menu">
+                <li><a href="#">Doctor Dashboard</a></li>
+                <li><a href="#">Appointments</a></li>
+                <li><a href="#">Available Timing</a></li>
+                <li><a href="#">Patients List</a></li>
+                <li><a href="#">Patients Profile</a></li>
+                <li><a href="#">Chat</a></li>
+                <li><a href="#">Invoices</a></li>
+                <li><a href="#">Profile Settings</a></li>
+                <li><a href="#">Reviews</a></li>
+              </ul>
+            )}
+          </li>
+          <li
+            className="dropdown"
+            onClick={() => toggleDropdown('patients')}
+          >
+            Patients <IoMdArrowDropdown />
+            {openDropdown === 'patients' && (
+              <ul className="dropdown-menu">
+                <li><a href="#">Patient Dashboard</a></li>
+                <li><a href="#">Doctors</a></li>
+                <li><a href="#">Search Doctor</a></li>
+                <li><a href="#">Doctor Profile</a></li>
+                <li><a href="#">Booking</a></li>
+                <li><a href="#">Checkout</a></li>
+                <li><a href="#">Booking Success</a></li>
+                <li><a href="#">Favourites</a></li>
+              </ul>
+            )}
+          </li>
+          <li
+            className="dropdown"
+            onClick={() => toggleDropdown('pages')}
+          >
+            Pages <IoMdArrowDropdown />
+            {openDropdown === 'pages' && (
+              <ul className="dropdown-menu">
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact Us</a></li>
+              </ul>
+            )}
+          </li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Admin <IoMdArrowDropdown /></a></li>
         </ul>
       </nav>
-    </div>
-  </header>
-);
+      <div className="header-actions">
+        <button className="btn-register">
+          <FaUser /> Register
+        </button>
+        <button className="btn-login">
+          <FaLock /> Login
+        </button>
+      </div>
+    </header>
+  );
+};
 
-export default Header; 
+export default Header;
