@@ -1,0 +1,31 @@
+# Root level
+.DS_Store
+.env
+*.env
+node_modules/
+dist/
+build/
+
+# Backend
+/backend/node_modules
+/backend/.env
+/backend/logs
+/backend/*.log
+
+# Frontend
+/frontend/node_modules
+/frontend/.env
+/frontend/build
+/frontend/.DS_Store
+
+# VS Code
+.vscode/
+
+# OS/Editor junk
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+*.swp
+*.swo
+*.bak
+*.tmp
