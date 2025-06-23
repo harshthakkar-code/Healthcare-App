@@ -33,8 +33,11 @@ exports.register = async (req, res, next) => {
     }
 
     // 4. Create user
-    const user = new User({ name, email, password, role, phone, gender, isApproved: role === 'doctor' ? false : true });
+    const user = new User({
+      ...req.body,
+      isApproved: role === 'doctor' ? false : true });
     await user.save();
+
 
     // 5. Create doctor profile if doctor
     if (role === 'doctor') {

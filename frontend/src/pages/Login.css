@@ -63,7 +63,7 @@
   text-decoration: none;
 }
 
-.options {
+.options1 {
   display: flex;
   justify-content: space-between;
   font-size: 13px;
@@ -71,7 +71,7 @@
   margin-bottom: 20px;
 }
 
-.signin-btn {
+.signin-btn-1 {
   width: 100%;
   background: linear-gradient(to right, #0080ff, #00c6ff);
   color: #fff;
@@ -83,14 +83,14 @@
   margin-bottom: 16px;
 }
 
-.divider {
+.divider1 {
   text-align: center;
   margin: 12px 0;
   font-size: 14px;
   color: #999;
 }
 
-.social-btn {
+.social-btn-1 {
   width: 100%;
   padding: 10px;
   font-size: 14px;
@@ -104,7 +104,7 @@
   justify-content: center;
 }
 
-.google {
+.google1 {
   background: #fff;
   border: 1px solid #ccc;
 }
@@ -123,4 +123,10 @@
 .signup-link a {
   color: #007bff;
   text-decoration: none;
+}
+
+.login-form input[type="checkbox"] {
+  /* margin-right: 5px; */
+  width: 20px !important;
+  /* height: 20px */
 }

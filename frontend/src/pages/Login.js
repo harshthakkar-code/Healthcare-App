@@ -46,7 +46,7 @@ const Login = () => {
           </div>
           <input type="password" placeholder="Enter your password" required value={password} onChange={e => setPassword(e.target.value)} />
 
-          <div className="options">
+          <div className="options1">
             <label>
               <input type="checkbox" /> Remember Me
             </label>
@@ -57,9 +57,9 @@ const Login = () => {
 
           <button type="submit" className="signin-btn" disabled={loading}>{loading ? 'Signing in...' : 'Sign in'}</button>
 
-          <div className="divider">or</div>
+          <div className="divider1">or</div>
 
-          <button type="button" className="social-btn google">
+          <button className="social-btn-1 google1">
             <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google" />
             Sign in With Google
           </button>
