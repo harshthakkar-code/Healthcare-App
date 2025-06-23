@@ -1,0 +1,81 @@
+.step5-container {
+  max-width: 400px;
+  margin: auto;
+  text-align: center;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.logo {
+  height: 50px;
+  margin: 20px auto;
+}
+
+.step-indicators {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.step {
+  width: 40px;
+  height: 40px;
+  margin: 0 5px;
+  border-radius: 10px;
+  background: #e0f3f9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.step.active {
+  background-color: #00d2ff;
+  color: #fff;
+}
+
+.sub-heading {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.continue-btn {
+  width: 100%;
+  background: linear-gradient(to right, #0080ff, #00c6ff);
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 999px;
+  font-weight: 600;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.back-btn {
+  width: 100%;
+  background-color: #f1f1f1;
+  color: #333;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  margin-top: 10px;
+  cursor: pointer;
+}

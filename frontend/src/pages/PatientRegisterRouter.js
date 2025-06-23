@@ -4,6 +4,7 @@ import PatientStep1 from './PatientStep1';
 import PatientStep2 from './PatientStep2';
 import PatientStep3 from './PatientStep3';
 import PatientStep4 from './PatientStep4';
+import PatientStep5 from './PatientStep5';
 
 const PatientRegisterRouter = () => {
   const [step, setStep] = useState(0);
@@ -29,7 +30,8 @@ const PatientRegisterRouter = () => {
       {step === 1 && <PatientStep1 formData={formData} setFormData={setFormData} nextStep={nextStep} prevStep={prevStep} />}
       {step === 2 && <PatientStep2 formData={formData} setFormData={setFormData} nextStep={nextStep} prevStep={prevStep} />}
       {step === 3 && <PatientStep3 formData={formData} setFormData={setFormData} nextStep={nextStep} prevStep={prevStep} />}
-      {step === 4 && <PatientStep4 formData={formData} prevStep={prevStep} />}
+      {step === 4 && <PatientStep4 formData={formData} setFormData={setFormData} nextStep={nextStep} prevStep={prevStep} />}
+      {step === 5 && <PatientStep5 formData={formData} setFormData={setFormData} prevStep={prevStep} />}
     </>
   );
 };

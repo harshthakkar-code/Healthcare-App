@@ -1,0 +1,78 @@
+.step4-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  font-family: 'Segoe UI', sans-serif;
+  text-align: center;
+}
+
+.logo {
+  width: 140px;
+  margin: 0 auto 20px;
+}
+
+.step-indicators {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.step-box {
+  width: 40px;
+  height: 40px;
+  margin: 0 5px;
+  background-color: #e4f5f9;
+  color: #000;
+  font-weight: bold;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-box.active {
+  background: #00d0ff;
+  color: white;
+}
+
+.member-group {
+  text-align: left;
+  margin-bottom: 25px;
+}
+
+.member-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 6px;
+  margin-top: 10px;
+}
+
+.member-group input[type="number"],
+.member-group input[type="file"] {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.continue-btn,
+.back-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 999px;
+  margin-top: 12px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.continue-btn {
+  background: linear-gradient(to right, #0080ff, #00c6ff);
+  color: white;
+}
+
+.back-btn {
+  background: #f1f1f1;
+  color: #333;
+}

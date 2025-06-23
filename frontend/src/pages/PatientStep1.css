@@ -1,0 +1,91 @@
+.patient-step-container {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 30px 20px;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.register-logo img {
+  height: 40px;
+  margin-bottom: 20px;
+}
+
+.step-indicator {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.step {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  background-color: #e5f6fb;
+  color: #333;
+  font-size: 16px;
+}
+
+.step.active {
+  background: #00dbff;
+  color: #fff;
+}
+
+.step-title {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.profile-upload-box {
+  background: #e6f0fc;
+  border-radius: 20px;
+  padding: 40px 20px;
+  cursor: pointer;
+  max-width: 200px;
+  margin: 0 auto 30px;
+  transition: transform 0.2s ease;
+}
+
+.profile-upload-box:hover {
+  transform: scale(1.02);
+}
+
+.profile-upload-box .camera-icon {
+  font-size: 36px;
+  color: #3f51b5;
+  margin-bottom: 10px;
+}
+
+.profile-upload-box p {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+.profile-preview {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #00c6ff;
+}
+
+.register-btn {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  background: linear-gradient(to right, #007bff, #00c6ff);
+  border: none;
+  border-radius: 999px;
+  color: #fff;
+  cursor: pointer;
+  text-transform: lowercase;
+  font-weight: 600;
+}

@@ -33,7 +33,7 @@ const DoctorStep0 = ({ nextStep, formData, setFormData }) => {
       <div className="step0-form-box">
         <div style={{ display: 'flex', alignItems: 'center',justifyContent: 'space-between' }}>
         <h2>Doctor Register</h2>
-        <a href="/patientstep0"><p>not a doctor?</p></a>
+        <a href="/patient-registration"><p>not a doctor?</p></a>
         </div>
         <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
         <input type="tel" placeholder="Phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
