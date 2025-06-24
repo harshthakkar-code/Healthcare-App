@@ -7,6 +7,7 @@
   background-color: #f7faff;
   padding: 10px 30px;
   border-bottom: 1px solid #e6e6e6;
+  height: 3rem
 }
 
 .logo {
@@ -107,4 +108,37 @@
     position: static;
     box-shadow: none;
   }
+}
+
+/* Style similar to Doccure 2nd image dropdown */
+.styled-dropdown {
+  padding: 0;
+  box-shadow: none;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  background-color: white;
+  min-width: 200px;
+  margin-top: 8px;
+  list-style: none;
+}
+
+.styled-dropdown li {
+  border-bottom: 1px solid #f0f0f0;
+  style: none;
+}
+
+.styled-dropdown li:last-child {
+  border-bottom: none;
+}
+
+.styled-dropdown li a {
+  display: block;
+  padding: 10px 16px;
+  color: #333;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.styled-dropdown li a:hover {
+  background-color: #f8f8f8;
 }

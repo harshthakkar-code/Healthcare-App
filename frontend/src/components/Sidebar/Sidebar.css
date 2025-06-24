@@ -1,0 +1,98 @@
+.sidebar-p {
+  width: 280px;
+  position: fixed ;
+  top: 69px;
+  left: 0;
+  background-color: #fff;
+  border-right: 1px solid #e0e0e0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.sidebar-cover {
+  /* background: #1a1f36 url('/bg-pattern.png') no-repeat center; */
+  background-size: cover;
+  height: 100px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.sidebar-profile {
+  text-align: center;
+  padding: 1.5rem 1rem 1rem;
+}
+
+.sidebar-profile .avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  margin-top: -40px;
+  object-fit: cover;
+}
+
+.patient-id {
+  font-size: 0.85rem;
+  color: #777;
+  margin: 0.3rem 0;
+}
+
+.meta {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.dot {
+  height: 8px;
+  width: 8px;
+  background-color: #007bff;  
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0 6px;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-menu li {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  cursor: pointer;
+  color: #333;
+  font-size: 15px;
+  gap: 10px;
+  position: relative;
+  transition: 0.3s ease;
+}
+
+.sidebar-menu li:hover{
+  background-color: #405973;
+  color: white;
+  font-weight: 500;
+}
+.sidebar-menu li.active {
+  background-color: #5f9ddf;
+  color: white;
+  font-weight: 500;
+}
+
+.sidebar-menu li .badge {
+  background: #f4c150;
+  color: white;
+  font-size: 10px;
+  border-radius: 50%;
+  padding: 3px 6px;
+  margin-left: auto;
+}
+
+.sidebar-menu li.logout {
+  margin-top: auto;
+  color: #dc3545;
+}

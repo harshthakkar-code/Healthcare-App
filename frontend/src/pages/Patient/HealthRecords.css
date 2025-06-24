@@ -1,0 +1,37 @@
+.health-records {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+.records-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 16px;
+}
+.record-card {
+  background: #f7faff;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+}
+.record-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+.record-value {
+  font-size: 20px;
+  font-weight: bold;
+  display: block;
+}
+.record-change {
+  font-size: 12px;
+  color: green;
+}
+.record-footer {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #555;
+}

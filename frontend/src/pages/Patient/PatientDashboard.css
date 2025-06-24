@@ -1,0 +1,220 @@
+.patient-dashboard {
+  padding: 40px 20px;
+  font-family: 'Segoe UI', sans-serif;
+  background: #f7faff;
+  color: #0d1c49;
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.breadcrumb {
+  font-size: 14px;
+  color: #059dff;
+  margin-bottom: 5px;
+}
+
+.dashboard-layout {
+  display: flex;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #fff !important;
+}
+
+.patient-sidebar {
+  width: 260px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.details {
+  font-size: 14px;
+  color: #777;
+}
+
+.sidebar-menu {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-menu li {
+  padding: 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.sidebar-menu li.active,
+.sidebar-menu li:hover {
+  background-color: #059dff;
+  color: white;
+}
+
+.patient-main {
+  flex: 1;
+}
+
+.health-records {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.record-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.record-item {
+  background: #eaf6ff;
+  padding: 16px;
+  border-radius: 10px;
+  text-align: center;
+  font-weight: 600;
+  color: #0d1c49;
+}
+
+.record-item span {
+  display: block;
+  font-size: 18px;
+  margin-top: 5px;
+}
+
+.report-date {
+  margin-top: 20px;
+  font-size: 13px;
+  color: #555;
+}
+
+.overall-report {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.report-ring .circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: #eaf6ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 auto 10px;
+  flex-direction: column;
+}
+
+.view-details {
+  margin-top: 16px;
+  padding: 10px 24px;
+  border: none;
+  background: #059dff;
+  color: white;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.health-records-box {
+  background: #fff;
+  padding: 24px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.health-records-box h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #0d1c49;
+}
+
+.records-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 20px;
+  column-gap: 40px;
+}
+
+.record-item {
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+  color: #0d1c49;
+}
+
+.icon {
+  font-size: 18px;
+  margin-bottom: 4px;
+}
+
+.record-label {
+  font-weight: 500;
+  margin-bottom: 4px;
+  color: #555;
+}
+
+.record-value {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.trend {
+  font-size: 12px;
+  margin-left: 6px;
+  font-weight: bold;
+}
+
+.trend.up {
+  color: #0fa958;
+}
+
+.trend.down {
+  color: #e44d4d;
+}
+
+.report-date {
+  margin-top: 24px;
+  font-size: 13px;
+  color: #666;
+}
+
+.dashboard-layout {
+  display: flex;
+  height: 100vh;
+  background-color: #f9fafe;
+}
+
+.main-panel {
+  flex: 1;
+  margin-left: 100px;
+  padding: 2rem;
+  overflow-y: auto;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
