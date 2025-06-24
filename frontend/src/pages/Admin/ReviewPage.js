@@ -23,7 +23,7 @@ const reviews = [
 
 const ReviewPage = () => {
   return (
-    <div className="review-container">
+    <div className="main-content">
       <h2>Reviews</h2>
       <p className="breadcrumb">Dashboard / Reviews</p>
       <div className="table-wrapper">

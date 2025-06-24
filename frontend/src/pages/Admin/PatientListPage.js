@@ -37,7 +37,7 @@ const patients = [
 
 const PatientListPage = () => {
   return (
-    <div className="patientlist-container">
+    <div className="main-content">
       <h2>List of Patient</h2>
       <p className="breadcrumb">Dashboard / Users / Patient</p>
 

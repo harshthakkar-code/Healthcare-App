@@ -13,7 +13,7 @@ import PatientRegisterRouter from './pages/Patient/PatientRegisterRouter';
 import DoctorList from './pages/Doctor/DoctorList';
 import './styles/App.css';
 import BookAppointment from './pages/Appointment/BookAppointment';
-import Admindashboard from './pages/Admin/Admindashboard';
+import AdminRoutes from './pages/Admin/AdminRoutes';
 
 function App() {
   const location = useLocation();
@@ -34,7 +34,7 @@ function App() {
           <Route path="/patient-registration" element={<PatientRegisterRouter />} />
           <Route path="/book-appointment" element={<BookAppointment />} />
           <Route path="/doctors" element={<DoctorList />} />
-          <Route path="/admin-dashboard" element={<Admindashboard />} />
+          <Route path="/admin/*" element={<AdminRoutes />} />
           {/* Add other routes here */}
           <Route path="*" element={<div>404 - Page Not Found</div>} />
         </Routes>

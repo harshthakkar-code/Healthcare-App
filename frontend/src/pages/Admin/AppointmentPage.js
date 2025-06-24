@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './AppointmentsPage.css';
+import "./AppointmentPage.css";
 
 const appointments = [
   {
@@ -39,7 +39,7 @@ const AppointmentsPage = () => {
   };
 
   return (
-    <div className="appointment-container">
+    <div className="main-content">
       <h2>Appointments</h2>
       <p className="breadcrumb">Dashboard / Appointments</p>
       <div className="table-wrapper">

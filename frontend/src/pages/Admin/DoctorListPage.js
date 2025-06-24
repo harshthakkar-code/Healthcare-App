@@ -42,7 +42,7 @@ const DoctorListPage = () => {
   };
 
   return (
-    <div className="doctorlist-container">
+    <div className="main-content">
       <h2>List of Doctors</h2>
       <p className="breadcrumb">Dashboard / Users / Doctor</p>
       <div className="table-wrapper">

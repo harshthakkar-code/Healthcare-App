@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./EditInvoiceModal.css";
+import "./EditInvoiceModel.css";
 
-const EditInvoiceModal = ({ data, onClose, onSave }) => {
+const EditInvoiceModel = ({ data, onClose, onSave }) => {
   const [formData, setFormData] = useState({ ...data });
 
   const handleChange = (e) => {
@@ -58,4 +58,4 @@ const EditInvoiceModal = ({ data, onClose, onSave }) => {
   );
 };
 
-export default EditInvoiceModal;
+export default EditInvoiceModel;

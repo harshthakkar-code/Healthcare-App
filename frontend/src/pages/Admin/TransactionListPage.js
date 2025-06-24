@@ -31,7 +31,7 @@ const transactions = [
 
 const TransactionListPage = () => {
   return (
-    <div className="transaction-container">
+    <div className="main-content">
       <h2>Transactions</h2>
       <p className="breadcrumb">Dashboard / Transactions</p>
 

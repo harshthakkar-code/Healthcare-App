@@ -2,16 +2,15 @@
   width: 240px;
   background-color: #1e2e50;
   color: white;
-  height: 100vh;
-  position: fixed;
-  left: 0;
-  top: 0;
+  height: 100%;
   overflow-y: auto;
-  box-shadow: 2px 0 8px rgba(0,0,0,0.08);
-  z-index: 210;
-  transition: transform 0.3s cubic-bezier(.4,0,.2,1);
-  display: flex;
-  flex-direction: column;
+  box-sizing: border-box;
+  transition: width 0.2s;
+  position: relative;
+}
+
+.sidebar.collapsed {
+  width: 30px!important;
 }
 
 .sidebar .close-btn {
@@ -35,6 +34,11 @@
   font-size: 22px;
   font-weight: bold;
   margin: 0;
+  transition: opacity 0.2s;
+}
+
+.sidebar.collapsed .logo-text {
+  opacity: 0;
 }
 
 .logo-blue {
@@ -57,44 +61,100 @@
   text-transform: uppercase;
   color: #9baec8;
   border-top: 1px solid #2f426a;
+  transition: opacity 0.2s;
+}
+
+.sidebar.collapsed .menu-label {
+  opacity: 0;
 }
 
 .menu-item {
+  display: block;
+  transition: background 0.3s, color 0.3s;
+  border-left: 3px solid transparent;
+}
+
+.menu-item a {
   padding: 14px 20px;
   display: flex;
   align-items: center;
   font-size: 14px;
   gap: 12px;
-  cursor: pointer;
-  transition: background 0.3s, color 0.3s;
   color: #c9d6e3;
-  border-left: 3px solid transparent;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.sidebar.collapsed .menu-item a {
+  justify-content: center;
+  gap: 0;
+}
+
+.menu-item a span {
+  display: inline;
+  transition: opacity 0.2s, width 0.2s;
+}
+
+.sidebar.collapsed .menu-item a span {
+  display: none;
+  width: 0;
+  opacity: 0;
 }
 
 .menu-item:hover {
   background-color: #273b61;
-  color: #fff;
   border-left: 3px solid #00c6ff;
+}
+
+.menu-item:hover a {
+  color: #fff;
 }
 
 .menu-item.active {
   background-color: #00c6ff;
-  color: white;
   border-left: 3px solid #fff;
+}
+
+.menu-item.active a {
+  color: white;
+}
+
+.collapse-btn {
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  width: 100%;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+  padding: 10px 0;
+  transition: background 0.2s;
+}
+.collapse-btn:hover {
+  background: #273b61;
 }
 
 @media (max-width: 899px) {
   .sidebar {
-    width: 240px;
-    min-width: 180px;
-    max-width: 90vw;
-    height: 100vh;
-    left: 0;
-    top: 0;
-    transform: translateX(0);
-    box-shadow: 2px 0 8px rgba(0,0,0,0.12);
+    width: 240px !important;
+  }
+  .sidebar.collapsed {
+    width: 240px !important;
+  }
+  .collapse-btn {
+    display: none;
   }
   .sidebar .close-btn {
     display: block;
   }
+}
+
+/* Adjust main-content and header when sidebar is collapsed */
+.admin-dashboard-outer.sidebar-collapsed .main-content {
+  padding-left: 60px !important;
+}
+.admin-dashboard-outer.sidebar-collapsed .admin-header {
+  padding-left: 60px !important;
 }

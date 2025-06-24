@@ -1,4 +1,6 @@
 import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "./AdminSideMenu.css";
 import {
   FaTachometerAlt,
@@ -13,65 +15,74 @@ import {
   FaExclamationCircle,
   FaColumns,
   FaClipboardList,
-  FaUsers,
   FaCalendarAlt,
 } from "react-icons/fa";
 
-const Sidebar = ({ onClose }) => {
+const Sidebar = ({ onClose, collapsed, onCollapse }) => {
+  const location = useLocation();
+
   return (
-    <div className="sidebar" style={{marginTop: '90px'}}>
-      {/* <button className="close-btn" onClick={onClose} aria-label="Close sidebar">×</button>
+    <div className={`sidebar${collapsed ? ' collapsed' : ''}`}>
+      <button className="close-btn" onClick={onClose} aria-label="Close sidebar">×</button>
       <div className="logo-section">
         <h2 className="logo-text">
           <span className="logo-blue">DOC</span>
           <span className="logo-green">CURE</span>
         </h2>
-      </div> */}
-
+      </div>
       <ul className="menu">
-        <li className="menu-label">Main</li>
-        <li className="menu-item active">
-          <FaTachometerAlt /> Dashboard
+        {/* <li className="menu-label">Main</li> */}
+        <li className={`menu-item${location.pathname === '/admin/dashboard' ? ' active' : ''}`}>
+          <Link to="/admin/dashboard">
+            <FaTachometerAlt /> {!collapsed && <span>Dashboard</span>}
+          </Link>
         </li>
-        <li className="menu-item">
-          <FaCalendarAlt /> Appointments
+        <li className={`menu-item${location.pathname === '/admin/appointments' ? ' active' : ''}`}>
+          <Link to="/admin/appointments">
+            <FaCalendarAlt /> {!collapsed && <span>Appointments</span>}
+          </Link>
         </li>
-        <li className="menu-item">
-          <FaClipboardList /> Specialities
+        {/* <li className={`menu-item${location.pathname === '/admin/specialities' ? ' active' : ''}`}>
+          <Link to="/admin/specialities">
+            <FaClipboardList /> Specialities
+          </Link>
+        </li> */}
+        <li className={`menu-item${location.pathname === '/admin/doctors' ? ' active' : ''}`}>
+          <Link to="/admin/doctors">
+            <FaUserMd /> {!collapsed && <span>Doctors</span>}
+          </Link>
         </li>
-        <li className="menu-item">
-          <FaUserMd /> Doctors
+        <li className={`menu-item${location.pathname === '/admin/patients' ? ' active' : ''}`}>
+          <Link to="/admin/patients">
+            <FaUserInjured /> {!collapsed && <span>Patients</span>}
+          </Link>
         </li>
-        <li className="menu-item">
-          <FaUserInjured /> Patients
+        <li className={`menu-item${location.pathname === '/admin/reviews' ? ' active' : ''}`}>
+          <Link to="/admin/reviews">
+            <FaStar /> {!collapsed && <span>Reviews</span>}
+          </Link>
         </li>
-        <li className="menu-item">
-          <FaStar /> Reviews
-        </li>
-        <li className="menu-item">
-          <FaChartBar /> Transactions
+        <li className={`menu-item${location.pathname === '/admin/transactions' ? ' active' : ''}`}>
+          <Link to="/admin/transactions">
+            <FaChartBar /> {!collapsed && <span>Transactions</span>}
+          </Link>
         </li>
 
-        <li className="menu-label">Pages</li>
-        <li className="menu-item">
-          <FaCogs /> Settings
+        {/* <li className="menu-label">Pages</li> */}
+        <li className={`menu-item${location.pathname === '/admin/reports' ? ' active' : ''}`}>
+          <Link to="/admin/reports">
+            <FaFileAlt /> {!collapsed && <span>Reports</span>}
+          </Link>
         </li>
-        <li className="menu-item">
-          <FaFileAlt /> Reports
-        </li>
-        <li className="menu-item">
-          <FaUserCircle /> Profile
-        </li>
-        <li className="menu-item">
-          <FaLock /> Authentication
-        </li>
-        <li className="menu-item">
-          <FaExclamationCircle /> Error Pages
-        </li>
-        <li className="menu-item">
-          <FaColumns /> Blank Page
+        <li className={`menu-item${location.pathname === '/admin/profile' ? ' active' : ''}`}>
+          <Link to="/admin/profile">
+            <FaUserCircle /> {!collapsed && <span>Profile</span>}
+          </Link>
         </li>
       </ul>
+      <button className="collapse-btn" onClick={onCollapse} aria-label="Collapse sidebar">
+        {collapsed ? <FaChevronRight /> : <FaChevronLeft />}
+      </button>
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./InvoiceReport.css";
 import { FaEdit, FaTrash } from "react-icons/fa";
-import EditInvoiceModal from "./EditInvoiceModal";
+import EditInvoiceModel from "./EditInvoiceModel";
 
 const invoiceData = [
   {
@@ -34,7 +34,7 @@ const InvoiceReport = () => {
   };
 
   return (
-    <div className="invoice-page">
+    <div className="main-content">
       <div className="page-header">
         <h2>Invoice Report</h2>
         <p>Dashboard / Invoice Report</p>
@@ -80,7 +80,7 @@ const InvoiceReport = () => {
       </div>
 
       {showModal && (
-        <EditInvoiceModal
+        <EditInvoiceModel
           data={editData}
           onClose={() => setShowModal(false)}
           onSave={(updated) => {

@@ -6,7 +6,7 @@ const Profile = () => {
   const [activeTab, setActiveTab] = useState("about");
 
   return (
-    <div className="profile-page">
+    <div className="main-content">
       <div className="page-header">
         <h2>Profile</h2>
         <p>Dashboard / Profile</p>
