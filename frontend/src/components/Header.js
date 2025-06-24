@@ -88,7 +88,17 @@ const Header = () => {
         </ul>
       </nav>
 
-  {!isLoggedIn && (
+  {isLoggedIn ? (
+  <div className="header-actions">
+    <button className="btn-login" onClick={() => {
+      localStorage.removeItem('token');
+      setIsLoggedIn(false);
+      window.location.href = '/';
+    }}>
+      Logout
+    </button>
+  </div>
+) : (
   <div className="header-actions">
     <button className="btn-register" onClick={() => window.location.href = '/doctor-register'}>
       <FaUser /> Register
@@ -98,6 +108,7 @@ const Header = () => {
     </button>
   </div>
 )}
+
 
     </header>
   );
