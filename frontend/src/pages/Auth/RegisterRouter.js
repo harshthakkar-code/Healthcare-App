@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import DoctorStep1 from './DoctorStep1';
-import DoctorStep2 from './DoctorStep2';
-import DoctorStep3 from './DoctorStep3';
-import DoctorStep0 from './DoctorStep0';
+import DoctorStep1 from '../Doctor/DoctorStep1';
+import DoctorStep2 from '../Doctor/DoctorStep2';
+import DoctorStep3 from '../Doctor/DoctorStep3';
+import DoctorStep0 from '../Doctor/DoctorStep0';
 
 const RegisterRouter = () => {
   const [step, setStep] = useState(0);

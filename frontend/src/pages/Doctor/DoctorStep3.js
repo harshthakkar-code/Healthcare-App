@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./DoctorStep3.css";
-import api from '../api';
+import api from '../../api/api';
 
 const DoctorStep3 = ({ formData, prevStep }) => {
   const [city, setCity] = useState("");

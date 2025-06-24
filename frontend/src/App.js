@@ -1,16 +1,17 @@
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Home from './pages/Home';
-import DoctorDashboard from './pages/DoctorDashboard';
-import PatientDashboard from './pages/PatientDashboard';
-import Login from './pages/Login';
-import AboutUs from './pages/AboutUs';
-import ContactUs from './pages/ContactUs';
-import ForgotPassword from './pages/ForgotPassword';
-import RegisterRouter from './pages/RegisterRouter';
-import PatientRegisterRouter from './pages/PatientRegisterRouter';
-import DoctorList from './pages/DoctorList';
+import Home from './pages/Home/Home';
+import DoctorDashboard from './pages/Doctor/DoctorDashboard';
+import PatientDashboard from './pages/Patient/PatientDashboard';
+import Login from './pages/Auth/Login';
+import AboutUs from './pages/AboutUs/AboutUs';
+import ContactUs from './pages/ContactUs/ContactUs';
+import ForgotPassword from './pages/Auth/ForgotPassword';
+import RegisterRouter from './pages/Auth/RegisterRouter';
+import PatientRegisterRouter from './pages/Patient/PatientRegisterRouter';
+import DoctorList from './pages/Doctor/DoctorList';
+import './styles/App.css';
 
 function App() {
   return (
