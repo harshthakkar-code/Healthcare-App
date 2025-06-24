@@ -33,7 +33,7 @@ const Login = () => {
       const res = await api.post('/auth/login', { email, password });
       setLoading(false);
       if (res.data.token) {
-        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('token', res.token);
         toast.success('Login successful!');
         setTimeout(() => { window.location.href = '/'; }, 1200);
       } else {

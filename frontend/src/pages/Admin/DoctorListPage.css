@@ -100,3 +100,47 @@ input:checked + .slider {
 input:checked + .slider::before {
   transform: translateX(20px);
 }
+.badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  color: #fff;
+}
+.badge.green { background: #22c55e; }
+.badge.red { background: #ef4444; }
+.badge.yellow { background: #eab308; }
+
+.approve-btn, .reject-btn {
+  padding: 5px 10px;
+  margin: 2px;
+  border: none;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.approve-btn { background-color: #10b981; color: #fff; }
+.reject-btn { background-color: #ef4444; color: #fff; }
+.approve-btn:disabled, .reject-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.icon-btn {
+  font-size: 18px;
+  margin: 0 5px;
+  cursor: pointer;
+  display: inline-block;
+  transition: transform 0.1s ease;
+}
+.icon-btn:hover {
+  transform: scale(1.2);
+}
+.icon-btn.approve {
+  color: #10b981; /* green */
+}
+.icon-btn.reject {
+  color: #ef4444; /* red */
+}
+.icon-btn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

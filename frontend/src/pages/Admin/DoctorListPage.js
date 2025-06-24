@@ -1,91 +1,108 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './DoctorListPage.css';
-
-const doctorData = [
-  {
-    name: 'Dr. Darren Elder',
-    avatar: '/avatars/elder.png',
-    specialty: 'Dental',
-    memberSince: '11 Jun 2023',
-    time: '4.50 AM',
-    earned: '$5000.00',
-    status: true
-  },
-  {
-    name: 'Dr. Deborah Angel',
-    avatar: '/avatars/angel.png',
-    specialty: 'Cardiology',
-    memberSince: '4 Jan 2018',
-    time: '9.40 AM',
-    earned: '$3300.00',
-    status: true
-  },
-  {
-    name: 'Dr. John Gibbs',
-    avatar: '/avatars/gibbs.png',
-    specialty: 'Dental',
-    memberSince: '21 Apr 2018',
-    time: '02.59 PM',
-    earned: '$4100.00',
-    status: true
-  },
-  // Add more doctors here...
-];
+import api from '../../api/api';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const DoctorListPage = () => {
-  const [doctors, setDoctors] = useState(doctorData);
+  const [doctors, setDoctors] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const toggleStatus = (index) => {
-    const updated = [...doctors];
-    updated[index].status = !updated[index].status;
-    setDoctors(updated);
+  const fetchDoctors = async () => {
+    try {
+      const res = await api.get('/doctor/public/docterlist');
+      setDoctors(res.data?.data || []);
+    } catch (error) {
+      toast.error('Failed to fetch doctor list');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchDoctors();
+  }, []);
+
+  const updateApproval = async (id, isApprovedValue) => {
+    try {
+      await api.put(`/admin/doctor-status/${id}`, { isApproved: isApprovedValue });
+      toast.success(`Doctor ${isApprovedValue === 'true' ? 'approved' : 'rejected'} successfully`);
+      fetchDoctors();
+    } catch (err) {
+      toast.error('Failed to update status');
+    }
+  };
+
+  const renderBadge = (status) => {
+    switch (status) {
+      case 'true':
+        return <span className="badge green">Approved</span>;
+      case 'false':
+        return <span className="badge red">Rejected</span>;
+      case 'pending':
+      default:
+        return <span className="badge yellow">Pending</span>;
+    }
   };
 
   return (
     <div className="main-content">
+      <ToastContainer position="top-center" autoClose={2000} />
       <h2>List of Doctors</h2>
       <p className="breadcrumb">Dashboard / Users / Doctor</p>
-      <div className="table-wrapper">
-        <table className="doctor-table">
-          <thead>
-            <tr>
-              <th>Doctor Name</th>
-              <th>Speciality</th>
-              <th>Member Since</th>
-              <th>Earned</th>
-              <th>Account Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {doctors.map((doc, idx) => (
-              <tr key={idx}>
-                <td>
-                  <div className="cell-with-img">
-                    <img src={doc.avatar} alt={doc.name} />
-                    {doc.name}
-                  </div>
-                </td>
-                <td>{doc.specialty}</td>
-                <td>
-                  {doc.memberSince}
-                  <div className="appt-time">{doc.time}</div>
-                </td>
-                <td>{doc.earned}</td>
-                <td>
-                  <label className="switch">
-                    <input
-                      type="checkbox"
-                      checked={doc.status}
-                      onChange={() => toggleStatus(idx)}
-                    />
-                    <span className="slider round"></span>
-                  </label>
-                </td>
+
+      {loading ? (
+        <p>Loading doctors...</p>
+      ) : (
+        <div className="table-wrapper">
+          <table className="doctor-table">
+            <thead>
+              <tr>
+                <th>Doctor Name</th>
+                <th>Phone</th>
+                <th>City</th>
+                <th>Created At</th>
+                <th>Approval Status</th>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {doctors.map((doc) => (
+                <tr key={doc._id}>
+                  <td>{doc.name || 'N/A'}</td>
+                  <td>{doc.phone || 'N/A'}</td>
+                  <td>{doc.city || '-'}</td>
+                  <td>{new Date(doc.createdAt).toLocaleDateString()}</td>
+                  <td>{renderBadge(doc.isApproved)}</td>
+                  <td>
+                    {doc.isApproved === 'pending' ? (
+                      <>
+                        <span
+                          className="icon-btn approve"
+                          onClick={() => updateApproval(doc._id, 'true')}
+                          title="Approve"
+                        >
+                          ✅
+                        </span>
+                        <span
+                          className="icon-btn reject"
+                          onClick={() => updateApproval(doc._id, 'false')}
+                          title="Reject"
+                        >
+                          ❌
+                        </span>
+                      </>
+                    ) : (
+                      <span className="icon-btn disabled" style={{ alignContent: 'center' }}>✅</span>
+                    )}
+                  </td>
+
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   );
 };
