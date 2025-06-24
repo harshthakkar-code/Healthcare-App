@@ -4,6 +4,7 @@ import api from '../../api/api';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -12,6 +13,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate();
 
   const validate = () => {
     const newErrors = {};
@@ -33,14 +35,20 @@ const Login = () => {
       const res = await api.post('/auth/login', { email, password });
       setLoading(false);
       if (res.data.token) {
-        console.log('Login successful:', res.data);
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('user', JSON.stringify(res.data.user));
+        localStorage.setItem('userId', res.data.user.id);
         localStorage.setItem('role', res.data.user.role);
-        // Redirect to home or dashboard
-
         toast.success('Login successful!');
-        // setTimeout(() => { window.location.href = '/'; }, 1200);
+        if (res.data.user.role === 'doctor') {
+          navigate('/doctor/dashboard');
+        } else if (res.data.user.role === 'patient') {
+          navigate('/patient/dashboard');
+        } else if (res.data.user.role === 'admin') {
+          navigate('/admin/dashboard');
+        } else {
+          navigate('/');
+        }
       } else {
         toast.error(res.data.message || 'Login failed.');
       }

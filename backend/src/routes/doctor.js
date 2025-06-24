@@ -19,6 +19,6 @@ router.post('/appointments', doctorController.createAppointment);
 router.get('/appointments/doctor/:doctorId', doctorController.getAppointmentsByDoctor);
 router.get('/appointments/all', doctorController.getAllAppointments);
 router.get('/appointments/patient/:patientId', doctorController.getAppointmentsByPatient);
-router.put('/appointments/:id/status', auth, role('doctor'), doctorController.updateAppointmentStatus);
+router.put('/appointments/:id/status', doctorController.updateAppointmentStatus);
 
 module.exports = router; 
