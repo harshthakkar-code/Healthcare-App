@@ -124,3 +124,35 @@
   color: #007bff;
   text-decoration: none;
 }
+
+.input-error {
+  color: #e74c3c;
+  font-size: 13px;
+  margin-top: -12px;
+  margin-bottom: 12px;
+  padding-left: 2px;
+}
+
+.password-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+.password-input-wrapper input[type="password"],
+.password-input-wrapper input[type="text"] {
+  width: 100%;
+  padding-right: 38px;
+  box-sizing: border-box;
+}
+.eye-icon {
+  position: absolute;
+  right: 12px;
+  top: 45%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888;
+  font-size: 18px;
+  z-index: 2;
+}
+.eye-icon:hover {
+  color: #007bff;
+}

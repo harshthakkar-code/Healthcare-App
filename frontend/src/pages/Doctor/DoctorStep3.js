@@ -1,17 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./DoctorStep3.css";
 import api from '../../api/api';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-const DoctorStep3 = ({ formData, prevStep }) => {
-  const [city, setCity] = useState("");
-  const [state, setState] = useState("");
+const DoctorStep3 = ({ formData, prevStep, step, setStep, setFormData }) => {
+  const [city, setCity] = useState(formData.city || "");
+  const [state, setState] = useState(formData.state || "");
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    setCity(formData.city || "");
+    setState(formData.state || "");
+  }, [formData]);
+
+  const validate = () => {
+    const newErrors = {};
+    if (!city) newErrors.city = 'City is required.';
+    if (!state) newErrors.state = 'State is required.';
+    return newErrors;
+  };
 
   const handleUpdate = async () => {
-    if (!city || !state) {
-      alert("City and State are required.");
-      return;
-    }
+    setSubmitted(true);
+    const validationErrors = validate();
+    setErrors(validationErrors);
+    if (Object.keys(validationErrors).length > 0) return;
 
     const data = new FormData();
     // Required fields from all steps
@@ -45,45 +61,76 @@ const DoctorStep3 = ({ formData, prevStep }) => {
       });
       setLoading(false);
       if (res.status === 201) {
-        alert("Registration complete! Please login.");
-        window.location.href = "/login";
+        toast.success("Registration complete! Please login.");
+        setFormData({});
+        setTimeout(() => { window.location.href = '/login'; }, 1500);
       } else {
-        alert(res.data.message || "Registration failed.");
+        toast.error(res.data.message || "Registration failed.");
       }
     } catch (err) {
       setLoading(false);
-      alert(err.response?.data?.message || "Registration failed. Please try again.");
+      toast.error(err.response?.data?.message || "Registration failed. Please try again.");
+    }
+  };
+
+  const handleCityChange = (e) => {
+    setCity(e.target.value);
+    setFormData(prev => ({ ...prev, city: e.target.value }));
+    if (submitted) {
+      setErrors((prev) => {
+        const { city, ...rest } = prev;
+        if (!e.target.value) return { ...rest, city: 'City is required.' };
+        return rest;
+      });
+    }
+  };
+  const handleStateChange = (e) => {
+    setState(e.target.value);
+    setFormData(prev => ({ ...prev, state: e.target.value }));
+    if (submitted) {
+      setErrors((prev) => {
+        const { state, ...rest } = prev;
+        if (!e.target.value) return { ...rest, state: 'State is required.' };
+        return rest;
+      });
     }
   };
 
   return (
     <div className="step3-container">
+      <ToastContainer position="top-center" autoClose={2000} />
       <img src="/logo.svg" alt="Doccure" className="logo" />
-
-      <div className="step-indicators">
+      <div className="step-indicator">
         <div className="step completed">✓</div>
         <div className="step completed">✓</div>
         <div className="step active">3</div>
       </div>
+      {step > 0 && (
+        <button className="back-btn small" onClick={() => setStep(step - 1)} style={{ display: 'block', margin: '0 auto 18px auto' }}>
+          ← Back
+        </button>
+      )}
 
       <h2>Your Location</h2>
 
       <div className="form-section">
         <label>Select City</label>
-        <select value={city} onChange={(e) => setCity(e.target.value)}>
+        <select value={city} onChange={handleCityChange}>
           <option value="">Select Your City</option>
           <option>Ahmedabad</option>
           <option>Surat</option>
           <option>Vadodara</option>
         </select>
+        {submitted && errors.city && <div className="input-error">{errors.city}</div>}
 
         <label>Select State</label>
-        <select value={state} onChange={(e) => setState(e.target.value)}>
+        <select value={state} onChange={handleStateChange}>
           <option value="">Select Your State</option>
           <option>Gujarat</option>
           <option>Maharashtra</option>
           <option>Rajasthan</option>
         </select>
+        {submitted && errors.state && <div className="input-error">{errors.state}</div>}
       </div>
 
       <div className="">

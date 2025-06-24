@@ -169,3 +169,21 @@
     color: #aaa;
   }
   
+  .back-btn.small {
+    padding: 4px 18px;
+    font-size: 14px;
+    border-radius: 16px;
+    background: #f3f3f3;
+    color: #333;
+    border: none;
+    margin-bottom: 12px;
+    margin-top: 0;
+    display: block;
+    box-shadow: none;
+    transition: background 0.2s;
+  }
+  .back-btn.small:hover {
+    background: #e0e0e0;
+    color: #0072ff;
+  }
+  
