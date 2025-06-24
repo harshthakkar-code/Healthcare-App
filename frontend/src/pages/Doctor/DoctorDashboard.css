@@ -1,0 +1,169 @@
+.doctor-dashboard {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f9fbfd;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.sidebar {
+  width: 240px;
+  background-color: #fff;
+  border-right: 1px solid #ddd;
+  padding: 1rem;
+  height: 875px;
+  overflow-y: auto;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar ul li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.sidebar ul li:hover,
+.sidebar ul li.active {
+  background-color: #e8f4ff;
+  color: #007bff;
+}
+
+.sidebar .badge {
+  background-color: #ffc107;
+  color: #000;
+  font-size: 12px;
+  border-radius: 10px;
+  padding: 2px 8px;
+  margin-left: auto;
+}
+
+.dashboard-content {
+  flex: 1;
+  padding: 2rem;
+}
+
+.stats-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: #fff;
+  flex: 1;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.stat-card h3 {
+  font-size: 16px;
+  color: #555;
+}
+
+.stat-card .count {
+  font-size: 32px;
+  font-weight: bold;
+  color: #222;
+}
+
+.stat-card .trend {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.stat-card.green .trend.up {
+  color: green;
+}
+
+.stat-card.red .trend.down {
+  color: red;
+}
+
+.appointment-section .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.appointments-list {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.appointment-card {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.appointment-card:last-child {
+  border-bottom: none;
+}
+
+.appointment-card img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+
+.appointment-card .info {
+  flex: 1;
+}
+
+.appointment-card .apt-id {
+  font-size: 14px;
+  color: #007bff;
+}
+
+.appointment-card h4 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.details {
+  text-align: right;
+}
+
+.badge-type {
+  background-color: #007bff;
+  color: #fff;
+  font-size: 12px;
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.actions {
+  margin-left: 1rem;
+}
+
+.actions button {
+  border: none;
+  padding: 5px 10px;
+  margin-left: 5px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.actions .accept {
+  color: green;
+  background: #e6ffed;
+}
+
+.actions .reject {
+  color: red;
+  background: #ffe6e6;
+}
