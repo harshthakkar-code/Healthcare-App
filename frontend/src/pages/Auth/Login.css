@@ -63,15 +63,16 @@
   text-decoration: none;
 }
 
-.options {
+.options-login {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   font-size: 13px;
   color: #444;
   margin-bottom: 20px;
+  align-items: center;
 }
 
-.signin-btn {
+.signin-btn-login {
   width: 100%;
   background: linear-gradient(to right, #0080ff, #00c6ff);
   color: #fff;
@@ -80,10 +81,9 @@
   border: none;
   border-radius: 999px;
   cursor: pointer;
-  margin-bottom: 16px;
 }
 
-.divider {
+.divider-login {
   text-align: center;
   margin: 12px 0;
   font-size: 14px;

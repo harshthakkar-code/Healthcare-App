@@ -51,10 +51,9 @@
   border: none;
   border-radius: 999px;
   cursor: pointer;
-  margin-bottom: 16px;
 }
 
-.divider {
+.divider-signup {
   text-align: center;
   margin: 12px 0;
   font-size: 14px;

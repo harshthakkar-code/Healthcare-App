@@ -4,6 +4,7 @@ import './DoctorStep0.css';
 const DoctorStep0 = ({ nextStep, formData, setFormData }) => {
   const [name, setName] = useState(formData.name || '');
   const [phone, setPhone] = useState(formData.phone || '');
+  const [email, setEmail] = useState(formData.email || '');
   const [password, setPassword] = useState(formData.password || '');
 
   const handleStart = () => {
@@ -16,6 +17,7 @@ const DoctorStep0 = ({ nextStep, formData, setFormData }) => {
       ...prev,
       name,
       phone,
+      email,
       password
     }));
 
@@ -37,11 +39,12 @@ const DoctorStep0 = ({ nextStep, formData, setFormData }) => {
         </div>
         <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
         <input type="tel" placeholder="Phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
+        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value )} />
         <input type="password" placeholder="Create Password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
         <button onClick={handleStart} className="step0-btn">Sign Up</button>
 
-        <div className="divider">or</div>
+        <div className="divider-signup">or</div>
 
         <button className="social-btn google">
           <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google" />

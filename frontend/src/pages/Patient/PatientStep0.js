@@ -4,6 +4,7 @@ import './PatientStep0.css';
 const PatientStep0 = ({ formData, setFormData, nextStep }) => {
   const [name, setName] = useState(formData.name || '');
   const [phone, setPhone] = useState(formData.phone || '');
+  const [email, setEmail] = useState(formData.email || '');
   const [password, setPassword] = useState(formData.password || '');
 
   const handleNext = () => {
@@ -12,7 +13,7 @@ const PatientStep0 = ({ formData, setFormData, nextStep }) => {
       return;
     }
 
-    setFormData({ ...formData, name, phone, password });
+    setFormData({ ...formData, name, phone, email, password });
     nextStep();
   };
 
@@ -23,7 +24,10 @@ const PatientStep0 = ({ formData, setFormData, nextStep }) => {
       </div>
 
       <div className="login-form-box">
+        <div style={{ display: 'flex', alignItems: 'center',justifyContent: 'space-between' }}>
         <h2>Patient Register</h2>
+        <a href="/doctor-register"><p>are you doctor?</p></a>
+        </div>
         <form className="login-form" onSubmit={(e) => e.preventDefault()}>
           <label>Name</label>
           <input type="text" placeholder="Enter your name" value={name} onChange={(e) => setName(e.target.value)} />
@@ -31,12 +35,15 @@ const PatientStep0 = ({ formData, setFormData, nextStep }) => {
           <label>Phone</label>
           <input type="text" placeholder="Enter your phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
 
+          <label>Email</label>
+          <input type="email" placeholder="Enter your email" value={email} onChange={(e) => setEmail(e.target.value)} />
+
           <label>Create Password</label>
           <input type="password" placeholder="Enter your password" value={password} onChange={(e) => setPassword(e.target.value)} />
 
-          <button type="button" className="signin-btn" onClick={handleNext}>Sign Up</button>
+          <button type="button" className="signin-btn-patient" onClick={handleNext}>Sign Up</button>
 
-          <div className="divider">or</div>
+          <div className="divider-signin-patient">or</div>
           <button className="social-btn google">
             <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google" />
             Sign in With Google
