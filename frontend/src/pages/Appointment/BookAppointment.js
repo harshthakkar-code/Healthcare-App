@@ -21,20 +21,24 @@ const BookAppointment = () => {
 
   return (
     <div className="appointment-container">
-     <div className="stepper-line">
+     <div className="doccure-stepper">
   {["Specialty", "Appointment Type", "Date & Time", "Basic Information", "Payment", "Confirmation"].map(
     (label, index) => (
-      <div
-        key={index}
-        className={`stepper-item ${step === index + 1 ? "active" : step > index + 1 ? "done" : ""}`}
-      >
-        <div className="stepper-icon">{index + 1}</div>
-        <div className="stepper-label">{label}</div>
-        {index < 5 && <div className="stepper-line-separator" />}
+      <div key={index} className="doccure-stepper-item">
+        <div className={`step-circle ${step === index + 1 ? "active" : ""}`}>
+          {index + 1}
+        </div>
+       
+        {index !== 5 && <div className="dotted-line" />}
+         {/* <div className={`step-label ${step === index + 1 ? "active" : ""}`}>
+          {label}
+        </div> */}
       </div>
+      
     )
   )}
 </div>
+
 
       {step === 1 && (
         <div className="step1-wrapper">
@@ -78,10 +82,135 @@ const BookAppointment = () => {
         </div>
       )}
 
+      {step === 2 && (
+  <>
+    <div className="doctor-card">
+      <img
+        className="doctor-avatar"
+        src="https://randomuser.me/api/portraits/men/75.jpg"
+        alt="Doctor"
+      />
+      <div className="doctor-details">
+        <h3>
+          Dr. Michael Brown <span className="rating">★ 5.0</span>
+        </h3>
+        <p className="role">Psychologist</p>
+        <p className="address">
+          📍 5th Street - 1011 W 5th St, Suite 120, Austin, TX 78703
+        </p>
+      </div>
+    </div>
+
+    <div className="form-section">
+      <label className="section-label">Select Appointment Type</label>
+      <div className="appointment-type-grid">
+        {[
+          { label: "Clinic", icon: "🏥" },
+          { label: "Video Call", icon: "📹" },
+          { label: "Audio Call", icon: "📞" },
+          { label: "Chat", icon: "💬" },
+          { label: "Home Visit", icon: "🏠" },
+        ].map((type, idx) => (
+          <div
+            key={idx}
+            className={`appointment-type-box ${
+              formData.appointmentType === type.label ? "selected" : ""
+            }`}
+            onClick={() =>
+              setFormData({ ...formData, appointmentType: type.label })
+            }
+          >
+            <div className="type-icon">{type.icon}</div>
+            <div className="type-label">{type.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </>
+)}
+
+{step === 3 && (
+  <>
+   <div className="doctor-summary-card">
+  <div className="doctor-top-row">
+    <img
+      src="https://randomuser.me/api/portraits/men/75.jpg"
+      alt="Doctor"
+      className="doctor-summary-avatar"
+    />
+    <div className="doctor-summary-info">
+      <h3>
+        Dr. Michael Brown <span className="rating">★ 5.0</span>
+      </h3>
+      <p className="role">Psychologist</p>
+      <p className="address">📍 5th Street - 1011 W 5th St, Suite 120, Austin, TX 78703</p>
+    </div>
+  </div>
+
+  <div className="booking-info">
+    <h4>Booking Info</h4>
+    <div className="info-grid">
+      <div>
+        <strong>Service</strong>
+        <p>{formData.specialty} (30 Mins)</p>
+      </div>
+      <div>
+        <strong>Service</strong>
+        <p>{formData.selectedService || "-"}</p>
+      </div>
+      <div>
+        <strong>Date & Time</strong>
+        <p>{formData.date || "-"} {formData.time ? `, ${formData.time}` : ""}</p>
+      </div>
+      <div>
+        <strong>Appointment type</strong>
+        <p>{formData.appointmentType || "-"}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div className="datetime-section">
+      <div className="calendar-box">
+        <input
+          type="date"
+          name="date"
+          value={formData.date}
+          onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+        />
+      </div>
+      <div className="time-box">
+        {["Morning", "Afternoon", "Evening"].map((period, i) => (
+          <div key={i} className="time-period">
+            <h5>{period}</h5>
+            <div className="time-slots">
+              {["09:45", "10:45", "11:30", "12:15"].map((slot, idx) => (
+                <div
+                  key={idx}
+                  className={`time-slot ${formData.time === slot ? "selected" : ""}`}
+                  onClick={() => setFormData({ ...formData, time: slot })}
+                >
+                  {slot}
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </>
+)}
+
+
+
       <div className="navigation">
-        {step > 1 && <button onClick={() => setStep(step - 1)}>Back</button>}
+        {step > 1 && <button style={{ marginRight: "auto" }} onClick={() => setStep(step - 1)}>Back</button>}
         {step === 1 && (
           <button onClick={() => setStep(2)}>Select Appointment Type</button>
+        )}
+        {step === 2 && (
+          <button onClick={() => setStep(3)}>Select Date & Time</button>
         )}
       </div>
     </div>
