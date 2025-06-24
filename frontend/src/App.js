@@ -32,7 +32,7 @@ function App() {
           <Route path="/forgotpassword" element={<ForgotPassword />} />
           <Route path="/doctor-register" element={<RegisterRouter />} />
           <Route path="/patient-registration" element={<PatientRegisterRouter />} />
-          <Route path="/book-appointment" element={<BookAppointment />} />
+          <Route path="/book-appointment/:doctorId" element={<BookAppointment />} />
           <Route path="/doctors" element={<DoctorList />} />
           <Route path="/admin/*" element={<AdminRoutes />} />
           {/* Add other routes here */}

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './AppointmentList.css';
 
 const appointments = [
@@ -20,29 +21,37 @@ const appointments = [
     email: 'shanta@example.com',
     phone: '+1 832 891 8403',
   },
-  // add more...
+  // more...
 ];
 
 const PatientAppointments = () => {
   const [filter, setFilter] = useState('Upcoming');
+  const navigate = useNavigate();
 
   return (
     <div className="appointments-page">
       <div className="appointments-header">
         <h2>Appointments</h2>
-        <div className="filters">
-          {['Upcoming', 'Cancelled', 'Completed'].map(f => (
-            <button
-              key={f}
-              className={filter === f ? 'active' : ''}
-              onClick={() => setFilter(f)}
-            >
-              {f} ({appointments.filter(a => a.id).length})
-            </button>
-          ))}
-        </div>
-        <div className="book-appointment">
-          <button style={{ backgroundColor: '#059dff', color: 'white' }}>Book Appointment</button>
+
+        <div className="appointments-actions">
+          <div className="filters">
+            {['Upcoming', 'Cancelled', 'Completed'].map(f => (
+              <button
+                key={f}
+                className={filter === f ? 'active' : ''}
+                onClick={() => setFilter(f)}
+              >
+                {f} ({appointments.filter(a => a.id).length})
+              </button>
+            ))}
+          </div>
+
+          <button
+            className="btn-book"
+            onClick={() => navigate('/doctors')}
+          >
+            Book Appointment
+          </button>
         </div>
       </div>
 

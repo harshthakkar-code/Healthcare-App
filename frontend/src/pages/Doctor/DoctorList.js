@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './DoctorList.css';
 import { FaStar ,FaCalendarAlt } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
 
 const API_URL = 'http://localhost:5000/api/doctor/public/docterlist';
 
@@ -14,6 +15,8 @@ const DoctorList = () => {
   const [specialty, setSpecialty] = useState('');
   const [review, setReview] = useState('');
   const [limit] = useState(6); // You can adjust this as needed
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     const fetchDoctors = async () => {
@@ -121,7 +124,7 @@ const DoctorList = () => {
                 <div className="doctor-card-fee-row">
                   <span className="doctor-card-fee-label">Consultation Fees</span>
                   <span className="doctor-card-fee">${doc.fee || 'N/A'}</span>
-                  <button className="book-now-btn">
+                  <button className="book-now-btn" onClick={() => navigate(`/book-appointment/${doc.user}`)}>
                     <FaCalendarAlt />
                     Book Now
                   </button>
