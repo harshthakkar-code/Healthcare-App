@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './DoctorList.css';
 import { FaStar ,FaCalendarAlt } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-
-const API_URL = 'http://localhost:5000/api/doctor/public/docterlist';
+import api from '../../api/api';
 
 const DoctorList = () => {
   const [doctors, setDoctors] = useState([]);
@@ -14,21 +13,21 @@ const DoctorList = () => {
   const [city, setCity] = useState('');
   const [specialty, setSpecialty] = useState('');
   const [review, setReview] = useState('');
-  const [limit] = useState(6); // You can adjust this as needed
+  const [limit] = useState(10); // You can adjust this as needed
   const navigate = useNavigate();
 
 
   useEffect(() => {
     const fetchDoctors = async () => {
       setLoading(true);
-      let url = `${API_URL}?page=${page}&limit=${limit}`;
-      if (search) url += `&name=${encodeURIComponent(search)}`;
-      if (city) url += `&city=${encodeURIComponent(city)}`;
-      if (specialty) url += `&specialization=${encodeURIComponent(specialty)}`;
-      if (review) url += `&avgReview=${review}`;
+      let params = { page, limit };
+      if (search) params.name = search;
+      if (city) params.city = city;
+      if (specialty) params.specialization = specialty;
+      if (review) params.avgReview = review;
       try {
-        const res = await fetch(url);
-        const data = await res.json();
+        const res = await api.get('/doctor/public/docterlist', { params });
+        const data = res.data;
         setDoctors(data.data || []);
         setTotalPages(Math.ceil((data.total || 1) / limit));
       } catch (err) {

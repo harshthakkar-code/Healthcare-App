@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./BookAppointment.css";
 import { useParams } from "react-router-dom";
+import api from '../../api/api';
 
 const servicesList = [
   { name: "Echocardiograms", price: 310 },
@@ -9,12 +10,8 @@ const servicesList = [
 ];
 const specialties = ["Cardiology", "Urology", "Orthopaedics"];
 
-
-
-
 const BookAppointment = () => {
   const { doctorId } = useParams();
-console.log("Doctor ID:", doctorId);
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     specialty: "",
@@ -27,6 +24,19 @@ console.log("Doctor ID:", doctorId);
     phone: "",
     symptoms: "",
   });
+  const [doctor, setDoctor] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!doctorId) return;
+    setLoading(true);
+    api.get(`/doctor/by-user/${doctorId}`)
+      .then(res => {
+        setDoctor(res.data);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, [doctorId]);
 
   const handleServiceSelect = (service) => {
     setFormData({ ...formData, selectedService: service });
@@ -36,17 +46,39 @@ console.log("Doctor ID:", doctorId);
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const renderDoctorCard = () => (
-    <div className="doctor-summary-card">
-      <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Doctor" />
-      <div className="info">
-        <h3>Dr. Michael Brown</h3>
-        <p className="specialty">Psychologist</p>
-        <p className="rating">★ 5.0</p>
-        <p className="address">📍 1011 W 5th St, Austin, TX</p>
+  const renderDoctorCard = () => {
+    let avatarSrc = "https://placehold.co/120x120?text=Doctor";
+    if (doctor) {
+      if (doctor.profileImage) {
+        avatarSrc = doctor.profileImage;
+      } else if (doctor.gender === "female") {
+        avatarSrc = process.env.PUBLIC_URL + "/female.png";
+      } else if (doctor.gender === "male") {
+        avatarSrc = process.env.PUBLIC_URL + "/male.png";
+      } else {
+        avatarSrc = process.env.PUBLIC_URL + "/logo192.png";
+      }
+    }
+    return (
+      <div className="doctor-summary-card">
+        {loading ? (
+          <div>Loading doctor...</div>
+        ) : doctor ? (
+          <>
+            <img src={avatarSrc} alt={doctor.name} />
+            <div className="info">
+              <h3>{doctor.name}</h3>
+              <p className="specialty">{doctor.specialization?.name || "General"}</p>
+              <p className="rating">★ {doctor.avgRating ? doctor.avgRating.toFixed(1) : "N/A"}</p>
+              <p className="address">📍 {doctor.clinicAddress || doctor.city || "-"}</p>
+            </div>
+          </>
+        ) : (
+          <div>Doctor not found</div>
+        )}
       </div>
-    </div>
-  );
+    );
+  };
 
   return (
     <div className="booking-wrapper">
