@@ -39,7 +39,7 @@ const DoctorList = () => {
 
   return (
     <div className="doctorlist-page">
-      <div className="doctorlist-breadcrumb">&gt; Doctor &gt; Doctor List</div>
+      {/* <div className="doctorlist-breadcrumb">&gt; Doctor &gt; Doctor List</div> */}
       <h2 className="doctorlist-title">Doctor List</h2>
 
       <div className="doctorlist-searchbar">
