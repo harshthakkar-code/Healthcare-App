@@ -1,0 +1,121 @@
+.invoice-page {
+  padding: 20px;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.page-header h2 {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.page-header p {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.table-wrapper {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow-x: auto;
+  padding: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+thead {
+  background-color: #f9f9f9;
+}
+
+th, td {
+  padding: 12px 14px;
+  text-align: left;
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+}
+
+.link {
+  color: #00c6ff;
+  cursor: pointer;
+}
+
+.user-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-cell img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.status-pill {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+}
+
+.status-pill.paid {
+  background-color: #4caf50;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-btn {
+  background: #e0f7ff;
+  color: #0088cc;
+  border: none;
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.delete-btn {
+  background: #ffe0e0;
+  color: #cc0000;
+  border: none;
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.pagination button {
+  background: #f2f2f2;
+  border: 1px solid #ddd;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.pagination button.active {
+  background: #00c6ff;
+  color: white;
+}
