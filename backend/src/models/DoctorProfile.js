@@ -29,6 +29,7 @@ const doctorProfileSchema = new mongoose.Schema({
   documents: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Document' }],
   reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
   earnings: { type: Number, default: 0 },
+  avgRating: { type: Number, default: null },
 }, { timestamps: true });
 
 module.exports = mongoose.model('DoctorProfile', doctorProfileSchema); 
