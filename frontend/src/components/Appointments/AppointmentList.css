@@ -1,0 +1,52 @@
+.appointments-page {
+  background: #f5f7fd;
+  padding: 20px;
+  border-radius: 12px;
+}
+.appointments-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.filters button {
+  background: none;
+  border: none;
+  padding: 6px 12px;
+  margin-right: 8px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.filters button.active {
+  background: #059dff;
+  color: white;
+  border-radius: 20px;
+}
+.appointment-list .appointment-card {
+  display: flex;
+  justify-content: space-between;
+  background: #fff;
+  padding: 14px 20px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+.left .apt-id {
+  font-size: 14px;
+  color: #059dff;
+}
+.left .doctor-name {
+  font-weight: bold;
+  font-size: 16px;
+}
+.middle div {
+  font-size: 14px;
+  margin: 4px 0;
+}
+.right .btn-attend {
+  background: #059dff;
+  border: none;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+}

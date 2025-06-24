@@ -67,9 +67,9 @@ const ContactUs = () => {
 
   return (
     <div className="contactus-page">
-      <div className="contactus-breadcrumb">
+      {/* <div className="contactus-breadcrumb">
         &gt; Contact Us
-      </div>
+      </div> */}
       <h2 className="contactus-title">Contact Us</h2>
       <div className="contactus-main">
         {/* LEFT INFO (same as before) */}

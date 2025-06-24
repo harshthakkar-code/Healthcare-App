@@ -30,7 +30,7 @@ const AboutUs = () => {
   return (
     <div className="aboutus-page">
       <div className="aboutus-hero">
-        <p className="aboutus-breadcrumb">About Us</p>
+        {/* <p className="aboutus-breadcrumb">About Us</p> */}
         <h2 className="aboutus-title">About Us</h2>
       </div>
 

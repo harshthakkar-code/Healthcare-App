@@ -1,35 +1,40 @@
-// Header.js
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { FaUser, FaLock } from 'react-icons/fa';
 import { IoMdArrowDropdown } from 'react-icons/io';
 import './Header.css';
 
 const Header = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
+  const navRef = useRef();
 
   const toggleDropdown = (menu) => {
-    setOpenDropdown(openDropdown === menu ? null : menu);
+    setOpenDropdown((prev) => (prev === menu ? null : menu));
   };
 
-  const closeDropdowns = () => {
-    setOpenDropdown(null);
+  const handleClickOutside = (e) => {
+    if (navRef.current && !navRef.current.contains(e.target)) {
+      setOpenDropdown(null);
+    }
   };
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, []);
 
   return (
-    <header className="header" onClick={closeDropdowns}>
+    <header className="header">
       <div className="header-left">
         <img src="/logo.svg" alt="Doccure Logo" className="logo" />
       </div>
-      <nav className="nav">
-        <ul className="nav-list" onClick={(e) => e.stopPropagation()}>
-          <li><a href="#">Home</a></li>
-          <li
-            className="dropdown"
-            onClick={() => toggleDropdown('doctors')}
-          >
+      <nav className="nav" ref={navRef}>
+        <ul className="nav-list">
+          <li><a href="/login">Home</a></li>
+
+          <li className="dropdown" onClick={() => toggleDropdown('doctors')}>
             Doctors <IoMdArrowDropdown />
             {openDropdown === 'doctors' && (
-              <ul className="dropdown-menu">
+              <ul className="dropdown-menu styled-dropdown">
                 <li><a href="#">Doctor Dashboard</a></li>
                 <li><a href="#">Appointments</a></li>
                 <li><a href="#">Available Timing</a></li>
@@ -42,13 +47,11 @@ const Header = () => {
               </ul>
             )}
           </li>
-          <li
-            className="dropdown"
-            onClick={() => toggleDropdown('patients')}
-          >
+
+          <li className="dropdown" onClick={() => toggleDropdown('patients')}>
             Patients <IoMdArrowDropdown />
             {openDropdown === 'patients' && (
-              <ul className="dropdown-menu">
+              <ul className="dropdown-menu styled-dropdown">
                 <li><a href="#">Patient Dashboard</a></li>
                 <li><a href="#">Doctors</a></li>
                 <li><a href="#">Search Doctor</a></li>
@@ -60,27 +63,27 @@ const Header = () => {
               </ul>
             )}
           </li>
-          <li
-            className="dropdown"
-            onClick={() => toggleDropdown('pages')}
-          >
+
+          <li className="dropdown" onClick={() => toggleDropdown('pages')}>
             Pages <IoMdArrowDropdown />
             {openDropdown === 'pages' && (
-              <ul className="dropdown-menu">
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Contact Us</a></li>
+              <ul className="dropdown-menu styled-dropdown">
+                <li><a href="/about-us">About Us</a></li>
+                <li><a href="/contact-us">Contact Us</a></li>
               </ul>
             )}
           </li>
+
           <li><a href="#">Blog</a></li>
           <li><a href="#">Admin <IoMdArrowDropdown /></a></li>
         </ul>
       </nav>
+
       <div className="header-actions">
-        <button className="btn-register">
+        <button className="btn-register" onClick={() => window.location.href = '/doctor-register'}>
           <FaUser /> Register
         </button>
-        <button className="btn-login">
+        <button className="btn-login" onClick={() => window.location.href = '/login'}>
           <FaLock /> Login
         </button>
       </div>
