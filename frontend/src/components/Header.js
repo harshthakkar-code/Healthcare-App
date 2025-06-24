@@ -6,6 +6,15 @@ import './Header.css';
 const Header = () => {
   const [openDropdown, setOpenDropdown] = useState(null);
   const navRef = useRef();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    setIsLoggedIn(true);
+  }
+}, []);
+
 
   const toggleDropdown = (menu) => {
     setOpenDropdown((prev) => (prev === menu ? null : menu));
@@ -79,14 +88,17 @@ const Header = () => {
         </ul>
       </nav>
 
-      <div className="header-actions">
-        <button className="btn-register" onClick={() => window.location.href = '/doctor-register'}>
-          <FaUser /> Register
-        </button>
-        <button className="btn-login" onClick={() => window.location.href = '/login'}>
-          <FaLock /> Login
-        </button>
-      </div>
+  {!isLoggedIn && (
+  <div className="header-actions">
+    <button className="btn-register" onClick={() => window.location.href = '/doctor-register'}>
+      <FaUser /> Register
+    </button>
+    <button className="btn-login" onClick={() => window.location.href = '/login'}>
+      <FaLock /> Login
+    </button>
+  </div>
+)}
+
     </header>
   );
 };
