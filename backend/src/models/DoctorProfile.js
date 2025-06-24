@@ -30,6 +30,7 @@ const doctorProfileSchema = new mongoose.Schema({
   reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Review' }],
   earnings: { type: Number, default: 0 },
   avgRating: { type: Number, default: null },
+  isApproved: { type: String, enum: ['pending', 'true', 'false'], default: 'pending' },
 }, { timestamps: true });
 
 module.exports = mongoose.model('DoctorProfile', doctorProfileSchema); 

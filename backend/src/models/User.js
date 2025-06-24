@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   role: { type: String, enum: ['admin', 'doctor', 'patient'], required: true },
   gender: { type: String, enum: ['male', 'female', 'other'] },
-  isApproved: { type: Boolean, default: false },
+  isApproved: { type: String, enum: ['pending', 'true', 'false'], default: 'pending' },
   avatar: { type: String },
   address: { type: String },
   address2: { type: String },

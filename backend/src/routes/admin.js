@@ -7,7 +7,7 @@ const role = require('../middlewares/role');
 router.use(auth, role('admin'));
 router.get('/dashboard', adminController.dashboard);
 router.get('/users', adminController.getUsers);
-router.put('/approve-doctor/:id', adminController.approveDoctor);
+router.put('/doctor-status/:id', adminController.updateDoctorStatus);
 router.delete('/user/:id', adminController.deleteUser);
 
 module.exports = router; 

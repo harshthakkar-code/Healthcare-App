@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const DoctorProfile = require('../models/DoctorProfile');
 
 exports.dashboard = async (req, res, next) => {
   try {
@@ -16,9 +17,15 @@ exports.getUsers = async (req, res, next) => {
   } catch (err) { next(err); }
 };
 
-exports.approveDoctor = async (req, res, next) => {
+exports.updateDoctorStatus = async (req, res, next) => {
   try {
-    const user = await User.findByIdAndUpdate(req.params.id, { isApproved: true }, { new: true });
+    let { isApproved } = req.body;
+    if (!['pending', 'true', 'false'].includes(isApproved)) {
+      return res.status(400).json({ message: 'isApproved must be "pending", "true", or "false"' });
+    }
+    console.log(isApproved);
+    const user = await User.findByIdAndUpdate(req.params.id, { isApproved }, { new: true });
+    await DoctorProfile.findOneAndUpdate({ user: req.params.id }, { isApproved });
     res.json(user);
   } catch (err) { next(err); }
 };
