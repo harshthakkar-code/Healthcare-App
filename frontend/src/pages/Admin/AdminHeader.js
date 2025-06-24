@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Header.css";
+import "./AdminHeader.css";
 import { FaBars, FaBell, FaSearch } from "react-icons/fa";
 
 const Header = ({ toggleSidebar }) => {

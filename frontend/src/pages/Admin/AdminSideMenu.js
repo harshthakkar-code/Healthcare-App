@@ -17,15 +17,16 @@ import {
   FaCalendarAlt,
 } from "react-icons/fa";
 
-const Sidebar = () => {
+const Sidebar = ({ onClose }) => {
   return (
-    <div className="sidebar">
+    <div className="sidebar" style={{marginTop: '90px'}}>
+      {/* <button className="close-btn" onClick={onClose} aria-label="Close sidebar">×</button>
       <div className="logo-section">
         <h2 className="logo-text">
           <span className="logo-blue">DOC</span>
           <span className="logo-green">CURE</span>
         </h2>
-      </div>
+      </div> */}
 
       <ul className="menu">
         <li className="menu-label">Main</li>

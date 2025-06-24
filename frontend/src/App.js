@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home/Home';
@@ -13,12 +13,15 @@ import PatientRegisterRouter from './pages/Patient/PatientRegisterRouter';
 import DoctorList from './pages/Doctor/DoctorList';
 import './styles/App.css';
 import BookAppointment from './pages/Appointment/BookAppointment';
+import Admindashboard from './pages/Admin/Admindashboard';
 
 function App() {
+  const location = useLocation();
+  const isAdminRoute = location.pathname.startsWith('/admin');
   return (
     <div>
-      <Header />
-      <main>
+      {!isAdminRoute && <Header />}
+      <main style={{ padding: 0 }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/doctor/dashboard" element={<DoctorDashboard />} />
@@ -31,11 +34,12 @@ function App() {
           <Route path="/patient-registration" element={<PatientRegisterRouter />} />
           <Route path="/book-appointment" element={<BookAppointment />} />
           <Route path="/doctors" element={<DoctorList />} />
+          <Route path="/admin-dashboard" element={<Admindashboard />} />
           {/* Add other routes here */}
           <Route path="*" element={<div>404 - Page Not Found</div>} />
         </Routes>
       </main>
-      <Footer />
+      {!isAdminRoute && <Footer />}
     </div>
   );
 }
