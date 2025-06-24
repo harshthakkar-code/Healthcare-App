@@ -33,9 +33,14 @@ const Login = () => {
       const res = await api.post('/auth/login', { email, password });
       setLoading(false);
       if (res.data.token) {
-        localStorage.setItem('token', res.token);
+        console.log('Login successful:', res.data);
+        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('user', JSON.stringify(res.data.user));
+        localStorage.setItem('role', res.data.user.role);
+        // Redirect to home or dashboard
+
         toast.success('Login successful!');
-        setTimeout(() => { window.location.href = '/'; }, 1200);
+        // setTimeout(() => { window.location.href = '/'; }, 1200);
       } else {
         toast.error(res.data.message || 'Login failed.');
       }
