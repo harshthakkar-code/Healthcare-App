@@ -6,11 +6,12 @@ import AvailableTimings from './AvailableTimings';
 import DoctorLayout from './DoctorLayout';
 import AppointmentsPage from './AppointmentsPage';
 import MyPatientsPage from './MyPatientsPage';
+import DoctorSpecialities from './DoctorSpecialties';
 
 
 
 // Stubs for other pages
-const SpecialtiesPage = () => <div className="dashboard-content"><h2>Specialties & Services</h2></div>;
+// const SpecialtiesPage = () => <div className="dashboard-content"><h2>Specialties & Services</h2></div>;
 const ReviewsPage = () => <div className="dashboard-content"><h2>Reviews</h2></div>;
 const InvoicesPage = () => <div className="dashboard-content"><h2>Invoices</h2></div>;
 
@@ -22,7 +23,7 @@ const DoctorRoutes = () => (
       <Route path="appointments" element={<AppointmentsPage />} />
       <Route path="available-timings" element={<AvailableTimings />} />
       <Route path="my-patients" element={<MyPatientsPage />} />
-      <Route path="specialties" element={<SpecialtiesPage />} />
+      <Route path="specialties" element={<DoctorSpecialities />} />
       <Route path="reviews" element={<ReviewsPage />} />
       <Route path="invoices" element={<InvoicesPage />} />
       <Route path="*" element={<DoctorDashboard />} />
