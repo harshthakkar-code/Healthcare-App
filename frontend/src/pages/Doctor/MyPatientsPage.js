@@ -1,81 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import api from '../../api/api';
 import './MyPatientsPage.css';
-
-const mockPatients = [
-  {
-    id: 'Apt0001',
-    name: 'Adrian',
-    avatar: 'https://randomuser.me/api/portraits/men/32.jpg',
-    age: 42,
-    gender: 'Male',
-    blood: 'AB+',
-    date: '2024-11-11T10:45',
-    location: 'Alabama, USA',
-    lastBooking: '2024-02-27',
-    status: 'Active',
-  },
-  {
-    id: 'Apt0002',
-    name: 'Kelly Stevens',
-    avatar: 'https://randomuser.me/api/portraits/women/44.jpg',
-    age: 37,
-    gender: 'Female',
-    blood: 'O+',
-    date: '2024-11-05T11:50',
-    location: 'San Diego, USA',
-    lastBooking: '2024-03-20',
-    status: 'Active',
-  },
-  {
-    id: 'Apt0003',
-    name: 'Samuel James',
-    avatar: 'https://randomuser.me/api/portraits/men/65.jpg',
-    age: 43,
-    gender: 'Male',
-    blood: 'B+',
-    date: '2024-10-27T09:30',
-    location: 'Chicago, USA',
-    lastBooking: '2024-03-12',
-    status: 'Active',
-  },
-  {
-    id: 'Apt0004',
-    name: 'Catherine Gracey',
-    avatar: 'https://randomuser.me/api/portraits/women/68.jpg',
-    age: 36,
-    gender: 'Female',
-    blood: 'AB-',
-    date: '2024-10-18T12:20',
-    location: 'Los Angeles, USA',
-    lastBooking: '2024-02-18',
-    status: 'Active',
-  },
-  {
-    id: 'Apt0005',
-    name: 'Robert Miller',
-    avatar: 'https://randomuser.me/api/portraits/men/33.jpg',
-    age: 38,
-    gender: 'Male',
-    blood: 'A+',
-    date: '2024-10-10T11:30',
-    location: 'Dallas, USA',
-    lastBooking: '2024-02-10',
-    status: 'Active',
-  },
-  {
-    id: 'Apt0006',
-    name: 'Anderea Kearns',
-    avatar: 'https://randomuser.me/api/portraits/women/69.jpg',
-    age: 40,
-    gender: 'Female',
-    blood: 'B-',
-    date: '2024-09-26T10:20',
-    location: 'San Francisco, USA',
-    lastBooking: '2024-02-15',
-    status: 'Active',
-  },
-  // Add more mock data for InActive as needed
-];
 
 const statusTabs = [
   { label: 'Active', key: 'Active' },
@@ -83,13 +8,15 @@ const statusTabs = [
 ];
 
 function formatDate(dateStr) {
+  if (!dateStr) return '';
   const date = new Date(dateStr);
   return date.toLocaleDateString('en-US', {
     day: '2-digit', month: 'short', year: 'numeric',
-  }) + ' ' + (dateStr.length > 10 ? date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) : '');
+  }) + (dateStr.length > 10 ? ' ' + date.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }) : '');
 }
 
 function formatBooking(dateStr) {
+  if (!dateStr) return '';
   const date = new Date(dateStr);
   return date.toLocaleDateString('en-US', { day: '2-digit', month: 'short', year: 'numeric' });
 }
@@ -99,11 +26,44 @@ const MyPatientsPage = () => {
   const [search, setSearch] = useState('');
   const [dateRange, setDateRange] = useState({ from: '', to: '' });
   const [filter, setFilter] = useState('');
+  const [patients, setPatients] = useState([]);
+  const [total, setTotal] = useState(0);
+  const [page, setPage] = useState(1);
+  const limit = 10;
+  const [loading, setLoading] = useState(false);
 
-  const filtered = mockPatients.filter(p =>
-    p.status === activeTab &&
-    (!search || p.name.toLowerCase().includes(search.toLowerCase()) || p.id.toLowerCase().includes(search.toLowerCase()))
-  );
+  useEffect(() => {
+    const fetchPatients = async () => {
+      setLoading(true);
+      try {
+        const params = {
+          page,
+          limit,
+          search,
+          dateFrom: dateRange.from,
+          dateTo: dateRange.to,
+        };
+        const res = await api.get('/doctor/patients-with-appointments', { params });
+        setPatients(res.data.data || []);
+        setTotal(res.data.total || 0);
+      } catch (err) {
+        setPatients([]);
+        setTotal(0);
+      }
+      setLoading(false);
+    };
+    fetchPatients();
+  }, [search, dateRange, page]);
+
+  // Filtering by gender/blood group (client-side, since backend doesn't support it yet)
+  const filtered = patients.filter(p => {
+    if (activeTab === 'Active' && p.patient && p.patient.isActive === false) return false;
+    if (activeTab === 'InActive' && p.patient && p.patient.isActive !== false) return false;
+    if (filter === 'male' && p.patient?.gender?.toLowerCase() !== 'male') return false;
+    if (filter === 'female' && p.patient?.gender?.toLowerCase() !== 'female') return false;
+    if (filter === 'blood' && !p.patient?.blood) return false;
+    return true;
+  });
 
   return (
     <div className="mypatients-page">
@@ -116,9 +76,7 @@ const MyPatientsPage = () => {
               className={`mypatients-tab${activeTab === tab.key ? ' active' : ''}`}
               onClick={() => setActiveTab(tab.key)}
             >
-              {tab.label} <span className="mypatients-badge">{mockPatients.filter(p => p.status === tab.key).length}</span>
-              {tab.key === 'Active' && <span className="mypatients-badge blue">200</span>}
-              {tab.key === 'InActive' && <span className="mypatients-badge grey">22</span>}
+              {tab.label}
             </button>
           ))}
         </div>
@@ -128,59 +86,74 @@ const MyPatientsPage = () => {
             type="text"
             placeholder="Search"
             value={search}
-            onChange={e => setSearch(e.target.value)}
+            onChange={e => { setSearch(e.target.value); setPage(1); }}
           />
-          <input
+          {/* <input
             className="mypatients-date"
             type="date"
             value={dateRange.from}
-            onChange={e => setDateRange(r => ({ ...r, from: e.target.value }))}
+            onChange={e => { setDateRange(r => ({ ...r, from: e.target.value })); setPage(1); }}
           />
           <span style={{ margin: '0 8px' }}>-</span>
           <input
             className="mypatients-date"
             type="date"
             value={dateRange.to}
-            onChange={e => setDateRange(r => ({ ...r, to: e.target.value }))}
+            onChange={e => { setDateRange(r => ({ ...r, to: e.target.value })); setPage(1); }}
           />
           <select className="mypatients-filter" value={filter} onChange={e => setFilter(e.target.value)}>
             <option value="">Filter By</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="blood">Blood Group</option>
-          </select>
+          </select> */}
         </div>
       </div>
       <div className="mypatients-list">
-        {filtered.length === 0 ? (
+        {loading ? (
+          <div className="mypatients-empty">Loading...</div>
+        ) : filtered.length === 0 ? (
           <div className="mypatients-empty">No patients found.</div>
         ) : (
-          filtered.map(p => (
-            <div className="mypatients-card" key={p.id}>
+          filtered.map((p, idx) => (
+            <div className="mypatients-card" key={p._id || idx}>
               <div className="mypatients-avatar">
-                <img src={p.avatar} alt={p.name} />
+                <img src={p.patient?.avatar || 'https://randomuser.me/api/portraits/lego/1.jpg'} alt={p.patient?.name || ''} />
               </div>
               <div className="mypatients-info">
-                <div className="mypatients-id">#{p.id}</div>
-                <div className="mypatients-name">{p.name}</div>
+                <div className="mypatients-id">#{p.patient?._id?.slice(-6) || ''}</div>
+                <div className="mypatients-name">{p.name || ''}</div>
                 <div className="mypatients-meta">
-                  Age: {p.age} <span className="dot">•</span> {p.gender} <span className="dot">•</span> {p.blood}
+                  Age: {p.patient?.age || '--'} <span className="dot">•</span> {p.patient?.gender || '--'} <span className="dot">•</span> {p.patient?.blood || '--'}
                 </div>
                 <div className="mypatients-appointment">
                   <span className="mypatients-datebox">
                     <i className="fa fa-calendar" /> {formatDate(p.date)}
                   </span>
                   <span className="mypatients-location">
-                    <i className="fa fa-map-marker" /> {p.location}
+                    <i className="fa fa-map-marker" /> {p.patient?.city || '--'}
                   </span>
                 </div>
                 <div className="mypatients-lastbooking">
-                  <i className="fa fa-clock-o" /> Last Booking {formatBooking(p.lastBooking)}
+                  <i className="fa fa-clock-o" /> Last Booking {formatBooking(p.updatedAt)}
                 </div>
               </div>
             </div>
           ))
         )}
+      </div>
+      {/* Pagination controls */}
+      <div style={{ marginTop: 24, textAlign: 'center' }}>
+        {Array.from({ length: Math.ceil(total / limit) }, (_, i) => (
+          <button
+            key={i}
+            className={`mypatients-tab${page === i + 1 ? ' active' : ''}`}
+            onClick={() => setPage(i + 1)}
+            style={{ margin: '0 2px' }}
+          >
+            {i + 1}
+          </button>
+        ))}
       </div>
     </div>
   );

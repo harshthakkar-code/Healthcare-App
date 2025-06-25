@@ -196,4 +196,62 @@ exports.updateAppointmentStatus = async (req, res, next) => {
     await appointment.save();
     res.json(appointment);
   } catch (err) { next(err); }
+};
+
+// Get paginated, filtered list of patients who have appointments with the doctor
+exports.getPatientsWithAppointments = async (req, res, next) => {
+  try {
+    const doctorId = req.user._id;
+    const { page = 1, limit = 10, search = '', dateFrom, dateTo } = req.query;
+    const skip = (parseInt(page) - 1) * parseInt(limit);
+    const match = { doctor: doctorId };
+    if (dateFrom || dateTo) {
+      match.date = {};
+      if (dateFrom) match.date.$gte = dateFrom;
+      if (dateTo) match.date.$lte = dateTo;
+    }
+    if (search) {
+      match.$or = [
+        { name: { $regex: search, $options: 'i' } },
+        { email: { $regex: search, $options: 'i' } },
+        { phone: { $regex: search, $options: 'i' } }
+      ];
+    }
+    // Aggregate to get latest appointment per patient
+    const pipeline = [
+      { $match: match },
+      { $sort: { date: -1, createdAt: -1 } },
+      { $group: {
+          _id: '$patient',
+          latestAppointment: { $first: '$$ROOT' }
+        }
+      },
+      { $lookup: {
+          from: 'users',
+          localField: '_id',
+          foreignField: '_id',
+          as: 'patientInfo'
+        }
+      },
+      { $unwind: '$patientInfo' },
+      { $replaceRoot: {
+          newRoot: {
+            $mergeObjects: [
+              '$latestAppointment',
+              { patient: '$patientInfo' }
+            ]
+          }
+        }
+      },
+      { $facet: {
+          data: [ { $skip: skip }, { $limit: parseInt(limit) } ],
+          total: [ { $count: 'count' } ]
+        }
+      }
+    ];
+    const result = await Appointment.aggregate(pipeline);
+    const data = result[0].data;
+    const total = result[0].total[0] ? result[0].total[0].count : 0;
+    res.json({ total, data });
+  } catch (err) { next(err); }
 }; 
