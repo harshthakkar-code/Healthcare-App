@@ -6,6 +6,7 @@ const Sidebar = ({ active, setActive }) => {
   const tabs = [
     { id: 'dashboard', label: 'Dashboard', icon: <FaThLarge /> },
     { id: 'appointments', label: 'My Appointments', icon: <FaCalendarAlt /> },
+    { id: 'doctors', label: 'Doctors', icon: <FaUserFriends /> }, // ← NEW LINE
     // { id: 'favourites', label: 'Favourites', icon: <FaStar /> },
     // { id: 'dependants', label: 'Dependants', icon: <FaUserFriends /> },
     // { id: 'records', label: 'Medical Records', icon: <FaFileMedical /> },
@@ -20,7 +21,7 @@ const Sidebar = ({ active, setActive }) => {
     <div className="sidebar-p">
       <div className="sidebar-profile">
         <div className="sidebar-cover" />
-        <img src="/avatar.jpg" alt="profile" className="avatar" />
+        <img src="/male.png" alt="profile" className="avatar"  style={{ border: '2px solid grey'}}/>
         <h3>Hendrita Hayes</h3>
         <p className="patient-id">Patient ID: PT254654</p>
         <p className="meta">Female <span className="dot" /> 32 years 03 Months</p>

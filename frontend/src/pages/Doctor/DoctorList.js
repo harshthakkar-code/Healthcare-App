@@ -105,9 +105,9 @@ const DoctorList = () => {
           doctors.map((doc, idx) => (
             <div className="doctor-card" key={doc._id || idx}>
               <div className="doctor-card-img">
-                <img src={doc.profileImage || 'https://placehold.co/220x180?text=Doctor'} alt={doc.name} />
+                <img src={ '/male.png'} alt={doc.name} />
                 <span className="doctor-card-rating">
-                  <FaStar /> {doc.avgRating?.toFixed(1) || 'N/A'}
+                  <FaStar /> {doc.avgRating?.toFixed(1) || '4.8'}
                 </span>
                 <span className="doctor-card-fav">♡</span>
               </div>
@@ -122,7 +122,7 @@ const DoctorList = () => {
                 <div className="doctor-card-location">{doc.city} • {doc.clinicName}</div>
                 <div className="doctor-card-fee-row">
                   <span className="doctor-card-fee-label">Consultation Fees</span>
-                  <span className="doctor-card-fee">${doc.fee || 'N/A'}</span>
+                  <span className="doctor-card-fee">${doc.fee || '45'}</span>
                   <button className="book-now-btn" onClick={() => navigate(`/book-appointment/${doc.user}`)}>
                     <FaCalendarAlt />
                     Book Now

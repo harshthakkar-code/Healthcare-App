@@ -3,6 +3,7 @@ import './HealthRecords.css';
 
 const HealthRecords = ({ records, lastVisit }) => (
   <div className="health-records">
+        <h1 className="dashboard-header">Patient Dashboard</h1>
     <h2>Health Records</h2>
     <div className="records-grid">
       {records.map((r, i) => (

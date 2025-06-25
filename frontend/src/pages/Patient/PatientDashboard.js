@@ -3,6 +3,7 @@ import './PatientDashboard.css';
 import Sidebar from '../../components/Sidebar/Sidebar';
 import HealthRecords from './HealthRecords';
 import PatientAppointments from '../../components/Appointments/AppointmentList';
+import DoctorList from '../Doctor/DoctorList';
 
 const PatientDashboard = () => {
   const [active, setActive] = useState('dashboard');
@@ -12,7 +13,6 @@ const PatientDashboard = () => {
       <Sidebar active={active} setActive={setActive} />
 
       <div className="main-panel">
-        <h1 className="dashboard-header">Patient Dashboard</h1>
 
         {active === 'dashboard' && (
           <div className="dashboard-main">
@@ -33,6 +33,11 @@ const PatientDashboard = () => {
         {active === 'appointments' && (
           <PatientAppointments activeTab={active} setActiveTab={setActive} />
         )}
+
+        {active === 'doctors' && (
+  <DoctorList />
+)}
+
       </div>
     </div>
   );
