@@ -4,7 +4,16 @@ import { FaCalendarCheck, FaUsers, FaClock, FaUserMd, FaStar, FaFileInvoice, FaN
 import api from '../../api/api';
 import { Link, useLocation } from 'react-router-dom';
 
-const doctorId = '6859592ab3408025b2a3cdbe'; // TODO: Replace with dynamic doctorId from auth or route if needed
+const getDoctorId = () => {
+  // Try to get from localStorage (set at login)
+  try {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user && user.id) return user.id;
+    if (user && user._id) return user._id;
+  } catch {}
+  return null;
+};
+const doctorId = getDoctorId();
 
 const DoctorDashboard = () => {
   const [appointments, setAppointments] = useState([]);

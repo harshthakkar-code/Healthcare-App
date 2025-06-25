@@ -46,31 +46,38 @@
     align-items: center;
     background: #fff;
     border-radius: 10px;
-    padding: 15px;
-    gap: 20px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    padding: 15px 24px;
+    gap: 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    min-width: 0;
   }
   
   .profile-img {
-    width: 50px;
-    height: 50px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     object-fit: cover;
   }
   
-  .appointment-info {
-    flex: 1;
-  }
-  
-  .top-row {
+  .appointment-details {
     display: flex;
-    gap: 10px;
-    align-items: center;
-    font-weight: 600;
+    flex-direction: column;
+    gap: 2px;
+    font-size: 15px;
+    flex: 1 1 0%;
+    min-width: 0;
   }
   
   .apt-id {
-    color: #0d6efd;
+    color: #2563eb;
+    font-weight: 600;
+    font-size: 1em;
+  }
+  
+  .apt-name {
+    font-weight: 700;
+    margin-left: 8px;
+    font-size: 1em;
   }
   
   .new-badge {
@@ -101,28 +108,7 @@
     flex-direction: column;
   }
   
-  .actions {
-    display: flex;
-    gap: 10px;
-    margin-left: auto;
-  }
-  
-  .actions button {
-    background: #e9ecef;
-    border: none;
-    padding: 8px;
-    border-radius: 8px;
-    cursor: pointer;
-    color: #333;
-  }
-  
-  .start-now {
-    margin-left: 20px;
-  }
-  
-  .start-now a {
-    color: #0d6efd;
-    font-weight: bold;
-    text-decoration: none;
+  .actions, .start-now, .appointment-info, .top-row {
+    display: none !important;
   }
   

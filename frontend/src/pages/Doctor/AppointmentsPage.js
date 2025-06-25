@@ -1,95 +1,109 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import api from '../../api/api';
 import './AppointmentsPage.css';
 
-const appointments = [
-  {
-    id: '#Apt0001',
-    name: 'Adrian',
-    date: '11 Nov 2024',
-    time: '10.45 AM',
-    type: 'General Visit',
-    mode: 'Video Call',
-    email: 'adran@example.com',
-    phone: '+1 504 368 6874',
-    image: 'https://randomuser.me/api/portraits/men/1.jpg',
-  },
-  {
-    id: '#Apt0002',
-    name: 'Kelly',
-    date: '05 Nov 2024',
-    time: '11.50 AM',
-    type: 'General Visit',
-    mode: 'Audio Call',
-    email: 'kelly@example.com',
-    phone: '+1 832 891 8403',
-    image: 'https://randomuser.me/api/portraits/women/2.jpg',
-    isNew: true,
-  },
-  {
-    id: '#Apt0003',
-    name: 'Samuel',
-    date: '27 Oct 2024',
-    time: '09.30 AM',
-    type: 'General Visit',
-    mode: 'Video Call',
-    email: 'samuel@example.com',
-    phone: '+1 749 104 6291',
-    image: 'https://randomuser.me/api/portraits/men/3.jpg',
-  },
-  {
-    id: '#Apt0004',
-    name: 'Catherine',
-    date: '18 Oct 2024',
-    time: '12.20 PM',
-    type: 'General Visit',
-    mode: 'Direct Visit',
-    email: 'catherine@example.com',
-    phone: '+1 584 920 7183',
-    image: 'https://randomuser.me/api/portraits/women/4.jpg',
-  },
+const getDoctorId = () => {
+  try {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user && user.id) return user.id;
+    if (user && user._id) return user._id;
+  } catch {}
+  return '6859592ab3408025b2a3cdbe';
+};
+
+const statusTabs = [
+  { key: 'all', label: 'All' },
+  { key: 'upcoming', label: 'Upcoming' },
+  { key: 'cancelled', label: 'Cancelled' },
+  { key: 'completed', label: 'Completed' },
 ];
 
+const getStatus = (apt) => {
+  if (apt.status === 'cancelled') return 'cancelled';
+  if (apt.status === 'completed') return 'completed';
+  if (apt.status === 'accepted' || apt.status === 'pending') {
+    const today = new Date().toISOString().slice(0, 10);
+    if (apt.date >= today) return 'upcoming';
+  }
+  return 'upcoming';
+};
+
 const AppointmentsPage = () => {
+  const [appointments, setAppointments] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [activeTab, setActiveTab] = useState('all');
+  const doctorId = getDoctorId();
+
+  useEffect(() => {
+    setLoading(true);
+    api.get(`/doctor/appointments/doctor/${doctorId}`)
+      .then(res => {
+        setAppointments(res.data || []);
+        setLoading(false);
+      })
+      .catch(() => setLoading(false));
+  }, [doctorId]);
+
+  const counts = {
+    all: appointments.length,
+    upcoming: appointments.filter(a => getStatus(a) === 'upcoming').length,
+    cancelled: appointments.filter(a => getStatus(a) === 'cancelled').length,
+    completed: appointments.filter(a => getStatus(a) === 'completed').length,
+  };
+
+  const filtered = activeTab === 'all'
+    ? appointments
+    : appointments.filter(a => getStatus(a) === activeTab);
+
   return (
     <div className="appointments-page">
       <h2>Appointments</h2>
       <div className="appointments-tabs">
-        <button className="active">Upcoming <span>21</span></button>
-        <button>Cancelled <span>16</span></button>
-        <button>Completed <span>214</span></button>
+        {statusTabs.map(tab => (
+          <button
+            key={tab.key}
+            className={activeTab === tab.key ? 'active' : ''}
+            onClick={() => setActiveTab(tab.key)}
+          >
+            {tab.label} <span>{counts[tab.key]}</span>
+          </button>
+        ))}
       </div>
 
       <div className="appointments-list">
-        {appointments.map((apt, index) => (
-          <div className="appointment-card" key={index}>
-            <img className="profile-img" src={apt.image} alt={apt.name} />
-            <div className="appointment-info">
-              <div className="top-row">
-                <span className="apt-id">{apt.id}</span>
-                <span className="apt-name">{apt.name}</span>
-                {apt.isNew && <span className="new-badge">New</span>}
-              </div>
-              <div className="date-time">
-                <span>{apt.date}</span> <span>{apt.time}</span>
-              </div>
-              <div className="visit-details">
-                {apt.type} | {apt.mode}
-              </div>
-              <div className="contact-info">
-                <span>{apt.email}</span>
-                <span>{apt.phone}</span>
+        {loading ? (
+          <div>Loading...</div>
+        ) : filtered.length === 0 ? (
+          <div>No appointments found.</div>
+        ) : (
+          filtered.map((apt, index) => (
+            <div className="appointment-card" key={apt._id || index}>
+              <img
+                className="profile-img"
+                src={apt.patient?.profileImage || 'https://randomuser.me/api/portraits/men/1.jpg'}
+                alt={apt.patient?.name || apt.name || 'Patient'}
+              />
+              <div className="appointment-details">
+                <div>
+                  <span className="apt-id">#{apt._id?.slice(-6) || apt.id}</span>
+                  <span className="apt-name">{apt.patient?.name || apt.name || 'Unknown'}</span>
+                </div>
+                <div style={{ margin: "2px 0" }}>
+                  {apt.date} {apt.time}
+                </div>
+                <div style={{ color: "#222" }}>
+                  {(apt.service || apt.type || apt.specialty || 'General Visit')}
+                  {" | "}
+                  {(apt.appointmentType || apt.mode || '')}
+                </div>
+                <div style={{ color: "#555" }}>
+                  {apt.patient?.email || apt.email || ''}<br />
+                  {apt.patient?.phone || apt.phone || ''}
+                </div>
               </div>
             </div>
-            <div className="actions">
-              <button title="View"><i className="fa fa-eye" /></button>
-              <button title="Edit"><i className="fa fa-edit" /></button>
-              <button title="Delete"><i className="fa fa-trash" /></button>
-            </div>
-            <div className="start-now">
-              <a href="#">Start Now</a>
-            </div>
-          </div>
-        ))}
+          ))
+        )}
       </div>
     </div>
   );
