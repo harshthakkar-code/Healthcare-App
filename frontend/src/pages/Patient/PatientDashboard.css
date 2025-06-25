@@ -218,3 +218,65 @@
   height: 100%;
   box-sizing: border-box;
 }
+
+.patient-dashboard-row {
+  display: flex;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 240px;
+  background-color: #1e2e50;
+  color: #000 !important;
+  height: 100vh;
+  overflow-y: auto;
+  transition: width 0.2s;
+  position: relative;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  margin-bottom: 0;
+}
+
+.sidebar li a {
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  gap: 12px;
+  color: #000 !important;
+  text-decoration: none;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  border-radius: 0;
+  transition: background 0.2s, color 0.2s;
+}
+
+.sidebar li.active {
+  background-color: #00c6ff;
+}
+
+.sidebar li.active a {
+  color: #000 !important;
+}
+
+.sidebar li a:hover {
+  color: #000 !important;
+}
+
+.dashboard-content {
+  flex: 1 1 0%;
+  padding: 24px;
+  min-width: 0;
+  background: #fff;
+  width: 100%;
+}

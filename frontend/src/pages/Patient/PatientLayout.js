@@ -16,6 +16,9 @@ const PatientLayout = ({ children }) => {
             <li className={location.pathname === '/patient/health-records' ? 'active' : ''}>
               <Link to="/patient/health-records">Health Records</Link>
             </li>
+            <li className={location.pathname === '/doctors' ? 'active' : ''}>
+              <Link to="/doctors">Doctors</Link>
+            </li> 
           </ul>
         </aside>
         <main className="dashboard-content">
