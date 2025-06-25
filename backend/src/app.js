@@ -18,6 +18,8 @@ app.use('/api/notifications', require('./routes/notification'));
 app.use('/api/specializations', require('./routes/specialization'));
 app.use('/api/upload', require('./routes/upload'));
 app.use('/api/reports', require('./routes/report'));
+const slotRoutes = require('./routes/slot');
+app.use('/api/slots', slotRoutes);
 // Add more as needed
 
 app.use(require('./middlewares/errorHandler'));
