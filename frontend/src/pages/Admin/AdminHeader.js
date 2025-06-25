@@ -8,12 +8,12 @@ const Header = ({ toggleSidebar }) => {
   return (
     <div className="admin-header">
       <div className="header-left">
+        {/* <FaBars className="menu-toggle-icon" onClick={toggleSidebar} /> */}
         <img src="/logo.svg" alt="Logo" className="header-logo" />
-        <FaBars className="menu-toggle-icon" onClick={toggleSidebar} />
-        <div className="search-box">
+        {/* <div className="search-box">
           <input type="text" placeholder="Search here" />
           <FaSearch className="search-icon" />
-        </div>
+        </div> */}
       </div>
 
       <div className="header-right">

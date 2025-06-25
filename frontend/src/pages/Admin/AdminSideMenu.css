@@ -9,10 +9,22 @@
   position: relative;
 }
 
+/* Collapsed sidebar: hide completely */
 .sidebar.collapsed {
-  width: 30px!important;
+  width: 60px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
 }
 
+/* Hide internal elements when collapsed */
+.sidebar.collapsed .menu-item a,
+.sidebar.collapsed .menu-label,
+.sidebar.collapsed .logo-text,
+.sidebar.collapsed .collapse-btn {
+  display: none !important;
+}
+
+/* Close button (X) */
 .sidebar .close-btn {
   display: none;
   align-self: flex-end;
@@ -85,10 +97,10 @@
   transition: color 0.3s;
 }
 
-.sidebar.collapsed .menu-item a {
+/* .sidebar.collapsed .menu-item a {
   justify-content: center;
   gap: 0;
-}
+} */
 
 .menu-item a span {
   display: inline;
@@ -97,11 +109,13 @@
 
 .sidebar.collapsed .menu-item a span {
   display: none;
-  width: 0;
-  opacity: 0;
+  /* width: 0;
+  opacity: 0; */
 }
 
+
 .menu-item:hover {
+  color: #000 !important;
   background-color: #273b61;
   border-left: 3px solid #00c6ff;
 }
@@ -116,9 +130,10 @@
 }
 
 .menu-item.active a {
-  color: white;
+  color: #000;
 }
 
+/* Collapse button toggle */
 .collapse-btn {
   position: absolute;
   bottom: 16px;
@@ -132,29 +147,51 @@
   padding: 10px 0;
   transition: background 0.2s;
 }
+
 .collapse-btn:hover {
   background: #273b61;
 }
 
+/* Responsive styles */
 @media (max-width: 899px) {
   .sidebar {
     width: 240px !important;
   }
+
   .sidebar.collapsed {
     width: 240px !important;
+    overflow: auto !important;
   }
+
   .collapse-btn {
-    display: none;
+    display: none !important;
   }
+
   .sidebar .close-btn {
-    display: block;
+    display: block !important;
   }
 }
 
 /* Adjust main-content and header when sidebar is collapsed */
-.admin-dashboard-outer.sidebar-collapsed .main-content {
-  padding-left: 60px !important;
-}
+.admin-dashboard-outer.sidebar-collapsed .main-content,
 .admin-dashboard-outer.sidebar-collapsed .admin-header {
   padding-left: 60px !important;
+  /* width: 100% !important; */
+}
+
+.menu-item a[title]:hover::after {
+  content: attr(title);
+  position: absolute;
+  left: 70px;
+  background: #222;
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+/* On hover: make icon and text black if not active */
+.menu-item:not(.active):hover a {
+  color: #000 !important;
 }

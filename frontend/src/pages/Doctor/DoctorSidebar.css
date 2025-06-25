@@ -1,0 +1,84 @@
+/* Shared Sidebar Styles (can reuse admin styles too) */
+.sidebar {
+  width: 240px;
+  background-color: #1e2e50;
+  color: black !important;
+  height: 100vh;
+  overflow-y: auto;
+  transition: width 0.2s;
+  position: relative;
+}
+
+.sidebar.collapsed {
+  width: 60px !important;
+  overflow: hidden !important;
+}
+
+.menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.menu-item a,
+.menu-item button {
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  gap: 12px;
+  color: #000 !important;
+  text-decoration: none;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sidebar.collapsed .menu-item a span,
+.sidebar.collapsed .menu-item button span {
+  display: none !important;
+}
+
+.sidebar.collapsed .menu-item a,
+.sidebar.collapsed .menu-item button {
+  justify-content: center;
+}
+
+.menu-item:hover:not(.active) a,
+.menu-item:hover:not(.active) button {
+  color: #000 !important;
+}
+
+.menu-item.active {
+  background-color: #00c6ff;
+}
+
+.menu-item.active a,
+.menu-item.active button {
+  color: #fff;
+}
+
+.collapse-btn {
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  width: 100%;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 12px 0;
+}
+
+.dashboard-content {
+  padding: 24px;
+  width: 100%;
+}
+
+/* Sidebar shift */
+.doctor-dashboard.sidebar-collapsed .dashboard-content {
+  padding-left: 60px !important;
+}

@@ -22,14 +22,8 @@ const Sidebar = ({ onClose, collapsed, onCollapse }) => {
   const location = useLocation();
 
   return (
-    <div className={`sidebar${collapsed ? ' collapsed' : ''}`}>
+    <div className={`sidebar${collapsed ? ' collapsed' : ''}`} style={{ marginTop: "60px" }}>
       <button className="close-btn" onClick={onClose} aria-label="Close sidebar">×</button>
-      <div className="logo-section">
-        <h2 className="logo-text">
-          <span className="logo-blue">DOC</span>
-          <span className="logo-green">CURE</span>
-        </h2>
-      </div>
       <ul className="menu">
         {/* <li className="menu-label">Main</li> */}
         <li className={`menu-item${location.pathname === '/admin/dashboard' ? ' active' : ''}`}>
@@ -80,9 +74,9 @@ const Sidebar = ({ onClose, collapsed, onCollapse }) => {
           </Link>
         </li>
       </ul>
-      <button className="collapse-btn" onClick={onCollapse} aria-label="Collapse sidebar">
+      {/* <button className="collapse-btn" onClick={onCollapse} aria-label="Collapse sidebar">
         {collapsed ? <FaChevronRight /> : <FaChevronLeft />}
-      </button>
+      </button> */}
     </div>
   );
 };
