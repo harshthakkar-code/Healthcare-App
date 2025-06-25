@@ -181,7 +181,7 @@ function AvailableTimings() {
             ) : (
               slots[selectedDay].map((slot, idx) => (
                 <span key={idx} className="slot-chip">
-                  {formatTime12hr(slot.startTime)} - {formatTime12hr(slot.endTime)}
+                  {formatTime12hr(slot.startTime)}
                 </span>
               ))
             )}
@@ -253,7 +253,7 @@ function AvailableTimings() {
                 <div className="slot-preview-items">
                   {slotPreview.map((slot, idx) => (
                     <div key={idx} className="slot-preview-chip">
-                      {formatTime12hr(slot.startTime)} - {formatTime12hr(slot.endTime)}
+                      {formatTime12hr(slot.startTime)}
                     </div>
                   ))}
                 </div>
@@ -277,7 +277,7 @@ function AvailableTimings() {
               Are you sure you want to remove this slots?
             </p>
             <div className="modal-actions">
-              <button className="cancel-btn" onClick={confirmDeleteAll}>Yes, Remove</button>
+              <button className="cancel-btn" onClick={confirmDeleteAll}>Yes</button>
               <button className="save-btn" onClick={cancelDeleteAll}>No, I Changed my mind</button>
             </div>
           </div>
