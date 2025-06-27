@@ -15,11 +15,12 @@ app.use('/api/doctor', require('./routes/doctor'));
 app.use('/api/patient', require('./routes/patient'));
 app.use('/api/blogs', require('./routes/blog'));
 app.use('/api/notifications', require('./routes/notification'));
-app.use('/api/specializations', require('./routes/specialization'));
+app.use('/api/specialization', require('./routes/specialization'));
 app.use('/api/upload', require('./routes/upload'));
 app.use('/api/reports', require('./routes/report'));
-const slotRoutes = require('./routes/slot');
-app.use('/api/slots', slotRoutes);
+app.use('/api/slots', require('./routes/slot'));
+app.use('/api/reviews', require('./routes/review'));
+app.use('/api/transactions', require('./routes/transaction'));
 // Add more as needed
 
 app.use(require('./middlewares/errorHandler'));
